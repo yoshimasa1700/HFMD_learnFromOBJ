@@ -1,0 +1,3 @@
+2
+clock/clock3.obj clock
+ornament/test3.obj ornament

@@ -23,6 +23,7 @@
 #include "CDataset.h"
 #include "CPatch.h"
 
+extern boost::lagged_fibonacci1279 genPose;
 
 
 class databaseNode{
@@ -82,6 +83,7 @@ private:
     static boost::lagged_fibonacci1279 gen;
 };
 
+void loadTrainObjFile(CConfig conf, std::vector<CPosDataset> &posSet);
 void loadTrainPosFile(CConfig conf, std::vector<CPosDataset> &posSet);//, boost::mt19937 &gen);
 void loadTrainNegFile(CConfig conf, std::vector<CNegDataset> &negSet);
 //void loadTestFile(CConfig conf, std::vector<CTestDataset> &testSet);

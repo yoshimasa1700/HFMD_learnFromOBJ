@@ -7,6 +7,8 @@ int main(int argc, char* argv[]){
 
   CConfig		conf;	 // setting
 
+  glutInit(&argc, argv);
+
   //read and check argument
   if(argc < 2) {
     cout << "Usage: ./learning [config.xml] [off_tree] [learningMode]"<< endl;

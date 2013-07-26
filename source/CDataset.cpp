@@ -2,14 +2,20 @@
 
 CParamset& CParamset::operator+=(const CParamset& obj){
     this->setCenterPoint(this->getCenterPoint() + obj.getCenterPoint());
-    this->setAngle(this->getAngle() + obj.getAngle());
+    double tempAngle[3];
+    for(int i = 0; i < 3; ++i)
+        tempAngle[i] = this->getAngle()[i] + obj.getAngle()[i];
+    this->setAngle(tempAngle);
 
     return *this;
 }
 
 CParamset& CParamset::operator/=(const float& div){
     this->setCenterPoint(cv::Point(this->getCenterPoint().x / (int)div, this->getCenterPoint().y / (int)div));
-    this->setAngle(this->getAngle() / div);
+    double tempAngle[3];
+    for(int i = 0; i < 3; ++i)
+        tempAngle[i] = this->getAngle()[i] / div;
+    this->setAngle(tempAngle);
 
     return *this;
 }
@@ -93,39 +99,55 @@ CDataset::~CDataset(){
 int CDataset::loadImage(const CConfig &conf){
     cv::Mat *rgbImg, *depthImg;
 
-    //std::cout << rgb << " " << depth << std::endl;
-
-    if(!conf.demoMode){
-        rgbImg = new cv::Mat;
-        *rgbImg = cv::imread(rgb,3).clone();
-        if(rgbImg->empty()){
-            std::cout << "error! rgb image file " << rgb << " not found!" << std::endl;
-            exit(-1);
+        if(!conf.demoMode){
+            rgbImg = new cv::Mat;
+            *rgbImg = cv::imread(rgb,3).clone();
+            if(rgbImg->empty()){
+                std::cout << "error! rgb image file " << rgb << " not found!" << std::endl;
+                exit(-1);
+            }
+            depthImg = new cv::Mat;
+            *depthImg = cv::imread(depth, CV_LOAD_IMAGE_ANYDEPTH).clone();
+            if(depthImg->empty()){
+                std::cout << "error! depth image file " << depth << " not found!" << std::endl;
+                img.push_back(rgbImg);
+                imgFlag  = 1;
+                return -1;
+            }
         }
-        depthImg = new cv::Mat;
-        *depthImg = cv::imread(depth, CV_LOAD_IMAGE_ANYDEPTH).clone();
-        if(depthImg->empty()){
-            std::cout << "error! depth image file " << depth << " not found!" << std::endl;
-            img.push_back(rgbImg);
-            imgFlag  = 1;
-            return -1;
+
+
+        if(!conf.demoMode){
+            if(conf.learningMode != 2)
+                cropImageAndDepth(rgbImg, depthImg, conf.mindist, conf.maxdist);
+        }else{
+            if(conf.learningMode != 2)
+                cropImageAndDepth(img.at(0), img.at(1), conf.mindist, conf.maxdist);
         }
-    }
 
-
-    if(!conf.demoMode){
-        if(conf.learningMode != 2)
-            cropImageAndDepth(rgbImg, depthImg, conf.mindist, conf.maxdist);
-    }else{
-        if(conf.learningMode != 2)
-            cropImageAndDepth(img.at(0), img.at(1), conf.mindist, conf.maxdist);
-    }
 
 
     if(!conf.demoMode){
         img.push_back(rgbImg);
         img.push_back(depthImg);
     }
+
+    imgFlag  = 1;
+
+    return 0;
+}
+
+int CDataset::loadImage(const CConfig &conf, const std::string modelName, const CParamset* param){
+    cv::Mat *rgbImg, *depthImg;
+    //std::cout << rgb << " " << depth << std::endl;
+    obj = new CGlObjLoader(this->getModelPath().c_str());
+    cv::vector<cv::Mat *> tempImage = obj->getAppearance(param->getAngle());
+
+    rgbImg = tempImage.at(0);
+    depthImg = tempImage.at(1);
+
+    this->img.push_back(rgbImg);
+    this->img.push_back(depthImg);
 
     imgFlag  = 1;
 
@@ -154,6 +176,7 @@ int CParamset::showParam(){
 }
 
 int CDataset::extractFeatures(const CConfig& conf){
+
     if(conf.rgbFeature == 1){
         feature.clear();
         feature.resize(32);

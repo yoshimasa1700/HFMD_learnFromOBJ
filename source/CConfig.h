@@ -123,6 +123,9 @@ public:
 
     int paramRadius;
 
+    std::string modelListFolder;
+    std::string modelListName;
+
 private:
     boost::property_tree::ptree pt;
 

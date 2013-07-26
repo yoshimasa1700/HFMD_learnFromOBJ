@@ -63,7 +63,7 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
                 //read center point
                 std::string tempClassName;
                 cv::Point tempPoint;
-                double tempAngle;
+                double tempAngle[3];
                 do{
                     CParamset tempParam;
                     //read class name
@@ -75,7 +75,7 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
                         testDataList >> tempPoint.y;
                         //temp.centerPoint.push_back(tempPoint);
                         tempParam.setCenterPoint(tempPoint);
-                        testDataList >> tempAngle;
+                        testDataList >> tempAngle[2];
                         //temp.angles.push_back(tempAngle);
                         tempParam.setAngle(tempAngle);
 

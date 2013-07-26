@@ -32,6 +32,7 @@ public:
     virtual ~CGlObjLoader(){}
 
     cv::vector<cv::Mat*> getAppearance(double r, double p, double y);
+    cv::vector<cv::Mat*> getAppearance(double* angle);
 
 private:
     cv::Mat frontBuffer;

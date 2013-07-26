@@ -1,6 +1,7 @@
 #include "util.h"
 
 boost::lagged_fibonacci1279 nCk::gen = boost::lagged_fibonacci1279();
+boost::lagged_fibonacci1279 genPose = boost::lagged_fibonacci1279();
 
 float calcSumOfDepth(cv::Mat &depth, const CConfig &conf){
     cv::Mat convertedDepth = cv::Mat(depth.rows, depth.cols, CV_8U);
@@ -17,6 +18,53 @@ float calcSumOfDepth(cv::Mat &depth, const CConfig &conf){
     return integralMat.at<int>(depth.rows, depth.cols);
 }
 
+void loadTrainObjFile(CConfig conf, std::vector<CPosDataset> &posSet)
+{
+    std::vector<std::string> modelPath(0);
+    std::vector<std::string> modelName(0);
+    std::string trainModelListPath = conf.modelListFolder + PATH_SEP + conf.modelListName;
+
+    boost::uniform_real<> dst(0, 360);
+    boost::variate_generator<boost::lagged_fibonacci1279&,
+            boost::uniform_real<> > rand(genPose, dst);
+
+
+    posSet.clear();
+
+    std::ifstream modelList(trainModelListPath.c_str());
+    if(!modelList.is_open()){
+        std::cout << "train model list is not found!" << std::endl;
+        exit(-1);
+    }
+
+    int modelNum = 0;
+    modelList >> modelNum;
+
+    for(int i = 0; i < modelNum; ++i){
+        std::string tempName;
+        modelList >> tempName;
+        modelPath.push_back(conf.modelListFolder +PATH_SEP + tempName);
+        std::string tempClass;
+        modelList >> tempClass;
+        modelName.push_back(tempClass);
+    }
+    for(int j = 0; j < modelNum; ++j){
+        for(int i = 0; i < conf.imagePerTree; ++i){
+            CPosDataset posTemp;
+            posTemp.setModelPath(modelPath.at(j));
+            posTemp.setClassName(modelName.at(j));
+            double tempAngle[3];
+            for(int i = 0; i < 3; ++i)
+                tempAngle[i] = rand();
+            posTemp.setAngle(tempAngle);
+            posTemp.setCenterPoint(cv::Point(320,240));
+
+            posSet.push_back(posTemp);
+        }
+    }
+
+    modelList.close();
+}
 
 void loadTrainPosFile(CConfig conf, std::vector<CPosDataset> &posSet)
 {
@@ -106,8 +154,9 @@ void loadTrainPosFile(CConfig conf, std::vector<CPosDataset> &posSet)
             database.add(posTemp.getParam()->getClassName(), tempSize, 0);
 
             //read angle grand truth
-            double tempAngle;
-            trainDataList >> tempAngle;
+            double tempAngle[3];
+            trainDataList >> tempAngle[2];
+
             posTemp.setAngle(tempAngle);
 
             tempDataSet.push_back(posTemp);

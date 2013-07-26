@@ -406,8 +406,8 @@ CRTree::CRTree(const char* filename, const char* databaseName,CConfig &conf):con
                     cv::Point tempPoint;
                     in >> tempPoint.x;
                     in >> tempPoint.y;
-                    double tempAngle;
-                    in >> tempAngle;
+                    double tempAngle[3];
+                    in >> tempAngle[2];
 
                     CParamset tempParam;
                     //tempParam.setClassName(tempClassName);
@@ -1169,7 +1169,7 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         //for(unsigned int c = 0; c<nclass; ++c) {
         meanAx[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getCenterPoint().x;
         meanAy[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getCenterPoint().y;
-        meanAParam[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle();
+        meanAParam[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle()[2];
         //}
     }
 
@@ -1191,7 +1191,7 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         tmp = SetA.at(i).getCenterPoint().y - meanAy[classDatabase.search(SetA.at(i).getClassName())];
         distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
 
-        tmp = SetA.at(i).getParam().getAngle() - meanAParam[classDatabase.search(SetA.at(i).getClassName())];
+        tmp = SetA.at(i).getParam().getAngle()[2] - meanAParam[classDatabase.search(SetA.at(i).getClassName())];
         distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
 
         //}
@@ -1205,7 +1205,7 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         //for(unsigned int c = 0; c<num_cp; ++c) {
         meanBx[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getCenterPoint().x;
         meanBy[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getCenterPoint().y;
-        meanBAngle[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle();
+        meanBAngle[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle()[2];
         //}
     }
 
@@ -1225,7 +1225,7 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
         tmp = (*it).getCenterPoint().y - meanBy[classDatabase.search(it->getClassName())];
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
-        tmp = (*it).getParam().getAngle() - meanBAngle[classDatabase.search(it->getClassName())];
+        tmp = (*it).getParam().getAngle()[2] - meanBAngle[classDatabase.search(it->getClassName())];
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
         //}
     }

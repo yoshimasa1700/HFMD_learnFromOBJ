@@ -34,13 +34,13 @@ void CRForest::learning(){
     // grow each tree
     // if you want to fix this program multi thread
     // you should change below
-#pragma omp parallel
-    {
-#pragma omp for
+//#pragma omp parallel
+//    {
+//#pragma omp for
         for(int i = 0;i < conf.ntrees; ++i){
             growATree(i);
         } // end tree loop
-    }
+   // }
 }
 
 void CRForest::growATree(const int treeNum){
@@ -60,7 +60,8 @@ void CRForest::growATree(const int treeNum){
     boost::mt19937    gen( treeNum * static_cast<unsigned long>(time(NULL)) );
     //boost::timer t;
 
-    loadTrainPosFile(conf, posSet);//, gen);
+    //loadTrainPosFile(conf, posSet);//, gen);
+    loadTrainObjFile(conf,posSet);
 
     CClassDatabase tempClassDatabase;
     // extract pos features and register classDatabase
@@ -107,7 +108,7 @@ void CRForest::growATree(const int treeNum){
         //std::cout << i << std::endl;
 
         //std::cout << posSet.at(i).rgb << std::endl;
-        if(posSet.at(i).loadImage(conf) == -1 && conf.learningMode != 2){
+        if(posSet.at(i).loadImage(conf, posSet.at(i).getModelPath(), posSet.at(i).getParam()) == -1 && conf.learningMode != 2){
             exit(-1);
         }
 
@@ -295,7 +296,7 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
                             if(pos.x > 0 && pos.y > 0 && pos.x < voteImage.at(cl).cols && pos.y < voteImage.at(cl).rows){
                                 double v = result.at(m)->pfg.at(cl) / ( result.size() * result.at(m)->param.at(l).size());
                                 voteImage.at(cl).at<float>(pos.y,pos.x) += v;//(result.at(m)->pfg.at(c) - 0.9);// * 100;//weight * 500;
-                                voteParam2.at(cl)[pos.y][pos.x].yaw.at<double>(0,result.at(m)->param.at(l).at(n).getAngle()) += v * 10000;
+                                voteParam2.at(cl)[pos.y][pos.x].yaw.at<double>(0,result.at(m)->param.at(l).at(n).getAngle()[2]) += v * 10000;
                                 //std::cout << result.at(m)->param.at(l).at(n).getAngle() << std::endl;
                                 //std::cout << v << std::endl;
                                 totalVote.at(cl) += 1;
@@ -328,35 +329,35 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
 
     // output image to file
     std::string opath;
-//    if(!conf.demoMode){
-//        //create result directory
-//        opath = testSet.getRgbImagePath();
-//        opath.erase(opath.find_last_of(PATH_SEP));
-//        std::string imageFilename = testSet.getRgbImagePath();
-//        imageFilename.erase(imageFilename.find_last_of("."));
-//        //imageFilename.erase(imageFilename.begin(),imageFilename.find_last_of(PATH_SEP));
-//        imageFilename = imageFilename.substr(imageFilename.rfind(PATH_SEP),imageFilename.length());
+    //    if(!conf.demoMode){
+    //        //create result directory
+    //        opath = testSet.getRgbImagePath();
+    //        opath.erase(opath.find_last_of(PATH_SEP));
+    //        std::string imageFilename = testSet.getRgbImagePath();
+    //        imageFilename.erase(imageFilename.find_last_of("."));
+    //        //imageFilename.erase(imageFilename.begin(),imageFilename.find_last_of(PATH_SEP));
+    //        imageFilename = imageFilename.substr(imageFilename.rfind(PATH_SEP),imageFilename.length());
 
-//        //opath += PATH_SEP;
-//        opath += imageFilename;
-//        std::string execstr = "mkdir -p ";
-//        execstr += opath;
-//        system( execstr.c_str() );
+    //        //opath += PATH_SEP;
+    //        opath += imageFilename;
+    //        std::string execstr = "mkdir -p ";
+    //        execstr += opath;
+    //        system( execstr.c_str() );
 
-//        for(int c = 0; c < classNum; ++c){
-//            std::stringstream cToString;
-//            cToString << c;
-//            std::string outputName = "output" + cToString.str() + ".png";
-//            std::string outputName2 = opath + PATH_SEP + "vote_" + classDatabase.vNode.at(c).name + ".png";
-//            //cv::imwrite(outputName.c_str(),outputImage.at(c));
-//            //cv::cvtColor(voteImage)
+    //        for(int c = 0; c < classNum; ++c){
+    //            std::stringstream cToString;
+    //            cToString << c;
+    //            std::string outputName = "output" + cToString.str() + ".png";
+    //            std::string outputName2 = opath + PATH_SEP + "vote_" + classDatabase.vNode.at(c).name + ".png";
+    //            //cv::imwrite(outputName.c_str(),outputImage.at(c));
+    //            //cv::cvtColor(voteImage)
 
-//            cv::Mat writeImage;
-//            //hist.convertTo(hist, hist.type(), 200 * 1.0/second_val,0);
-//            voteImage.at(c).convertTo(writeImage, CV_8UC1, 254);
-//            cv::imwrite(outputName2.c_str(),writeImage);
-//        }
-//    }
+    //            cv::Mat writeImage;
+    //            //hist.convertTo(hist, hist.type(), 200 * 1.0/second_val,0);
+    //            voteImage.at(c).convertTo(writeImage, CV_8UC1, 254);
+    //            cv::imwrite(outputName2.c_str(),writeImage);
+    //        }
+    //    }
 
     // create detection result
     CDetectionResult detectResult;
@@ -385,18 +386,18 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
 
         for(int x = 0; x < conf.paramRadius; ++x){
             for(int y = 0; y < conf.paramRadius; ++y){
-                    if( maxLoc.x + x < imgCol &&  maxLoc.y + y < imgRow)
-                        hist += voteParam2.at(c)[maxLoc.y + y][maxLoc.x + x];
-                    if(maxLoc.x - x > 0 && maxLoc.y - y > 0)
-                        hist += voteParam2.at(c)[maxLoc.y - y][maxLoc.x - x];
+                if( maxLoc.x + x < imgCol &&  maxLoc.y + y < imgRow)
+                    hist += voteParam2.at(c)[maxLoc.y + y][maxLoc.x + x];
+                if(maxLoc.x - x > 0 && maxLoc.y - y > 0)
+                    hist += voteParam2.at(c)[maxLoc.y - y][maxLoc.x - x];
             }
         }
 
         //hist.showHist();
 
-//        for(int p = 0; p < 360; ++p){
-//            std::cout << p << " " <<  voteParam2.at(c)[maxLoc.y][maxLoc.x].yaw.at<double>(0,p) << std::endl;
-//        }
+        //        for(int p = 0; p < 360; ++p){
+        //            std::cout << p << " " <<  voteParam2.at(c)[maxLoc.y][maxLoc.x].yaw.at<double>(0,p) << std::endl;
+        //        }
 
         //voteParam2.at(c)[maxLoc.y][maxLoc.x].showHist();
 

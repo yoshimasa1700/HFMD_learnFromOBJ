@@ -314,3 +314,21 @@ cv::vector<cv::Mat*> CGlObjLoader::getAppearance(double r, double p, double y){
 
     return appearance;
 }
+
+cv::vector<cv::Mat*> CGlObjLoader::getAppearance(double* angle){
+    roll = angle[0];
+    pitch = angle[1];
+    yaw = angle[2];
+
+    Reshape(640, 480);
+    Display();
+
+    cv::Mat* app = new cv::Mat(frontBuffer);
+    cv::Mat* depth = new cv::Mat(depthBuffer);
+
+    cv::vector<cv::Mat*> appearance(0);
+    appearance.push_back(app);
+    appearance.push_back(depth);
+
+    return appearance;
+}

@@ -60,7 +60,7 @@
   <negativedatafolderlist>negDataFolderList.txt</negativedatafolderlist>
   <negativedatalist>negDataList.txt</negativedatalist>
   <negativemode>1</negativemode>
-  <posnegpatchratio>1.2</posnegpatchratio>
+  <posnegpatchratio>1.2</posnegpatchpathratio>
   <activepatchratio>1.0</activepatchratio>
   <mindistance>350</mindistance>
   <maxdistance>1400</maxdistance>
@@ -71,4 +71,6 @@
   <rgbFeature>2</rgbFeature>
   <depthFeature>2</depthFeature>
   <paramradius>3</paramradius>
+  <modellistfolder>models</modellistfolder>
+  <modellistname>models.txt</modellistname>
 </root>
