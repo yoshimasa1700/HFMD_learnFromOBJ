@@ -1,0 +1,9 @@
+bottle
+can
+cup
+koaramarch
+ornament
+pack
+painomi
+pakuncho
+
