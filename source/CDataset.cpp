@@ -176,7 +176,6 @@ int CParamset::showParam(){
 }
 
 int CDataset::extractFeatures(const CConfig& conf){
-
     if(conf.rgbFeature == 1){
         feature.clear();
         feature.resize(32);
@@ -296,7 +295,7 @@ int CDataset::extractFeatures(const CConfig& conf){
       feature.push_back(integralMat);
 
 //            cv::namedWindow("test");
-//            cv::imshow("test", *integralMat);
+//            cv::imshow("test",   tempDepth);
 //            cv::waitKey(0);
 //            cv::destroyWindow("test");
 
@@ -389,6 +388,7 @@ CNegDataset convertPosToNeg2(CPosDataset &pos)
     CNegDataset tempNegDataset;
     tempNegDataset.setRgbImagePath(pos.getRgbImagePath());
     tempNegDataset.setDepthImagePath(pos.getDepthImagePath());
+    tempNegDataset.setModelPath(pos.getModelPath());
 
     return tempNegDataset;
 }
