@@ -1161,7 +1161,9 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
 
     std::vector<double> meanAx(nclass,0);
     std::vector<double> meanAy(nclass,0);
-    std::vector<double> meanAParam(nclass, 0);
+    std::vector<double> meanAroll(nclass, 0);
+    std::vector<double> meanApitch(nclass, 0);
+    std::vector<double> meanAyaw(nclass, 0);
     //for(std::vector<CPatch>::const_iterator it = SetA.begin(); it != SetA.end(); ++it) {
 
 
@@ -1169,7 +1171,9 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         //for(unsigned int c = 0; c<nclass; ++c) {
         meanAx[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getCenterPoint().x;
         meanAy[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getCenterPoint().y;
-        meanAParam[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle()[2];
+        meanAroll[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle()[0];
+        meanApitch[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle()[1];
+        meanAyaw[classDatabase.search(SetA.at(i).getClassName())] += SetA.at(i).getParam().getAngle()[2];
         //}
     }
 
@@ -1177,7 +1181,9 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
     for(int c = 0; c < nclass; ++c){
         meanAx[c] /= (double)SetA.size();
         meanAy[c] /= (double)SetA.size();
-        meanAParam[c] /= (double)SetA.size();
+        meanAroll[c] /= (double)SetA.size();
+        meanApitch[c] /= (double)SetA.size();
+        meanAyaw[c] /= (double)SetA.size();
     }
     //}
 
@@ -1191,7 +1197,13 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         tmp = SetA.at(i).getCenterPoint().y - meanAy[classDatabase.search(SetA.at(i).getClassName())];
         distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
 
-        tmp = SetA.at(i).getParam().getAngle()[2] - meanAParam[classDatabase.search(SetA.at(i).getClassName())];
+        tmp = SetA.at(i).getParam().getAngle()[0] - meanAroll[classDatabase.search(SetA.at(i).getClassName())];
+        distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
+
+        tmp = SetA.at(i).getParam().getAngle()[1] - meanApitch[classDatabase.search(SetA.at(i).getClassName())];
+        distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
+
+        tmp = SetA.at(i).getParam().getAngle()[2] - meanAyaw[classDatabase.search(SetA.at(i).getClassName())];
         distA[classDatabase.search(SetA.at(i).getClassName())] += tmp*tmp;
 
         //}
@@ -1199,13 +1211,17 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
 
     std::vector<double> meanBx(nclass,0);
     std::vector<double> meanBy(nclass,0);
-    std::vector<double> meanBAngle(nclass,0);
+    std::vector<double> meanBroll(nclass,0);
+    std::vector<double> meanBpitch(nclass,0);
+    std::vector<double> meanByaw(nclass,0);
     //for(std::vector<CPatch>::const_iterator it = SetB.begin(); it != SetB.end(); ++it) {
     for(int i = 0; i < SetB.size(); ++i){
         //for(unsigned int c = 0; c<num_cp; ++c) {
         meanBx[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getCenterPoint().x;
         meanBy[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getCenterPoint().y;
-        meanBAngle[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle()[2];
+        meanBroll[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle()[0];
+        meanBpitch[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle()[1];
+        meanByaw[classDatabase.search((SetB.at(i).getClassName()))] += SetB.at(i).getParam().getAngle()[2];
         //}
     }
 
@@ -1214,7 +1230,9 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         //for(unsigned int c = 0; c<num_cp; ++c) {
         meanBx[c] /= (double)SetB.size();
         meanBy[c] /= (double)SetB.size();
-        meanBAngle[c] /= (double)SetB.size();
+        meanBroll[c] /= (double)SetB.size();
+        meanBpitch[c] /= (double)SetB.size();
+        meanByaw[c] /= (double)SetB.size();
         //}
     }
 
@@ -1225,7 +1243,9 @@ double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CP
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
         tmp = (*it).getCenterPoint().y - meanBy[classDatabase.search(it->getClassName())];
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
-        tmp = (*it).getParam().getAngle()[2] - meanBAngle[classDatabase.search(it->getClassName())];
+        tmp = (*it).getParam().getAngle()[0] - meanBroll[classDatabase.search(it->getClassName())];
+        tmp = (*it).getParam().getAngle()[1] - meanBpitch[classDatabase.search(it->getClassName())];
+        tmp = (*it).getParam().getAngle()[2] - meanByaw[classDatabase.search(it->getClassName())];
         distB[classDatabase.search(it->getClassName())] += tmp*tmp;
         //}
     }
