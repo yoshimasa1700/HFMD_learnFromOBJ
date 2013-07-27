@@ -3,7 +3,7 @@
   <!-- Path to trees -->
   <treepath>trees/treetable</treepath>
   <!-- Number of trees -->
-  <ntree>100</ntree>
+  <ntree>2</ntree>
   <!-- Patch width -->
   <pwidth>20</pwidth>
   <!-- Patch height -->
@@ -32,7 +32,7 @@
   <!-- Train data file name -->
   <traindataname>trainData.txt</traindataname>
   <!-- Train image per tree-->
-  <trainimagepertree>20</trainimagepertree>
+  <trainimagepertree>10</trainimagepertree>
   <!-- min sample number-->
   <minsample>10</minsample>
   <!-- max depth of tree-->

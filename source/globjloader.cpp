@@ -3,11 +3,6 @@
 CGlObjLoader::CGlObjLoader(char* fname)
 {
 
-    glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH);//GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-
-    glutInitWindowSize(640, 480);	/*  Window Size If We Start In Windowed Mode */
-    glutCreateWindow("Wavefront Obj File Viewer");
-
     getMatrix();
     glClearColor(0.0, 0.0, 0.0, 0.0);   // glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,GLUT_ACTION_GLUTMAINLOOP_RETURNS);
     //glutMainLoop();
@@ -34,6 +29,10 @@ CGlObjLoader::CGlObjLoader(char* fname)
         glmVertexNormals(pmodel, 90.0, GL_TRUE);
     }
 
+}
+
+CGlObjLoader::~CGlObjLoader(){
+    glmDelete(pmodel);
 }
 
 
@@ -272,13 +271,20 @@ void CGlObjLoader::Display(void)
     //glTranslatef(0, 0, 0.3);	/* to center object down Z */
     glPopMatrix();
 
-    glutSwapBuffers();
+    glFlush();
 
-    frontBuffer = cv::Mat(480,640,CV_8UC3);
-    depthBuffer = cv::Mat(480,640,CV_32F);
+    frontBuffer =  cv::Mat(480,640,CV_8UC3);
+    depthBuffer =  cv::Mat(480,640,CV_32F);
+
+//    cv::Mat tempFront(480,640,CV_8UC3);
+//    cv::Mat depthFront(480,640,CV_32F);
 
     glReadPixels(0,0,frontBuffer.cols, frontBuffer.rows, GL_BGR, GL_UNSIGNED_BYTE , frontBuffer.data);
     glReadPixels(0,0,depthBuffer.cols, depthBuffer.rows, GL_DEPTH_COMPONENT , GL_FLOAT,depthBuffer.data);
+
+//    tempFront.copyTo(*frontBuffer);
+//    depthFront.copyTo(*depthBuffer);
+
 
     cv::flip(frontBuffer, frontBuffer, 0);
     cv::flip(depthBuffer, depthBuffer, 0);
@@ -321,6 +327,7 @@ cv::vector<cv::Mat*> CGlObjLoader::getAppearance(double* angle){
     yaw = angle[2];
 
     Reshape(640, 480);
+    //for(int i = 0; i < 20; ++i)
     Display();
 
     cv::Mat* app = new cv::Mat(frontBuffer);

@@ -80,8 +80,8 @@ void CRForest::growATree(const int treeNum){
         tempClassDatabase.add(posSet.at(i).getParam()->getClassName(),cv::Size(),0);
     }
 
-    std::vector<CPosDataset> tempPosSet(0);
-    int currentClass = treeNum % tempClassDatabase.vNode.size();
+//    std::vector<CPosDataset> tempPosSet(0);
+//    int currentClass = treeNum % tempClassDatabase.vNode.size();
 
     //std::cout << "okashiina" << std::endl;
 //    for(int i = 0; i < posSet.size(); ++i){
@@ -184,8 +184,32 @@ void CRForest::growATree(const int treeNum){
 
     delete tree;
 
+
     posPatch.clear();
     negPatch.clear();
+
+//    for(int i = 0; i< posSet.size(); ++i){
+//        cv::namedWindow("test");
+//        cv::imshow("test", *posSet.at(i).img.at(0));
+//        cv::waitKey(0);
+//        cv::destroyWindow("test");
+//    }
+
+
+//    for(int i = 0; i < posSet.size(); ++i){
+//        posSet.at(i).releaseImage();
+//    }
+
+//    for(int i = 0; i< posSet.size(); ++i){
+//        cv::namedWindow("test");
+//        cv::imshow("test", *posSet.at(i).feature.at(0));
+//        cv::waitKey(0);
+//        cv::destroyWindow("test");
+//    }
+
+//    for(int i = 0; i < posSet.size(); ++i){
+//        posSet.at(i).releaseFeatures();
+//    }
 
     posSet.clear();
     negSet.clear();

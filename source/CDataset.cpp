@@ -140,14 +140,24 @@ int CDataset::loadImage(const CConfig &conf){
 int CDataset::loadImage(const CConfig &conf, const std::string modelName, const CParamset* param){
     cv::Mat *rgbImg, *depthImg;
     //std::cout << rgb << " " << depth << std::endl;
-    obj = new CGlObjLoader(this->getModelPath().c_str());
-    cv::vector<cv::Mat *> tempImage = obj->getAppearance(param->getAngle());
+    CGlObjLoader obj(this->getModelPath().c_str()); //= new CGlObjLoader(this->getModelPath().c_str());
+    cv::vector<cv::Mat *> tempImage = obj.getAppearance(param->getAngle());
+
+
 
     rgbImg = tempImage.at(0);
     depthImg = tempImage.at(1);
 
+//    rgbImg = new cv::Mat(480,640,CV_8U);// = cv::Mat::zeros(480,640,CV_8U);
+//    depthImg = new cv::Mat(480,640,CV_8U);// = cv::Mat::zeros(480,640,CV_8U);
+
+//    *rgbImg = cv::Mat::ones(480, 640, CV_8U);
+//    *depthImg = cv::Mat::ones(480, 640, CV_8U
+
     this->img.push_back(rgbImg);
     this->img.push_back(depthImg);
+
+    //delete obj;
 
     imgFlag  = 1;
 
@@ -160,8 +170,11 @@ int CDataset::releaseImage(){
         return -1;
     }
 
-    for(int i = 0; i < img.size(); ++i)
-        delete img.at(i);
+    for(int i = 0; i < img.size(); ++i){
+            delete img.at(i);
+    }
+
+    imgFlag = 0;
 
     return 0;
 }
@@ -176,95 +189,95 @@ int CParamset::showParam(){
 }
 
 int CDataset::extractFeatures(const CConfig& conf){
-    if(conf.rgbFeature == 1){
-        feature.clear();
-        feature.resize(32);
-        for(int i = 0; i < 32; ++i)
-            feature.at(i) = new cv::Mat(img.at(0)->rows, img.at(0)->cols, CV_8UC1);
+//    if(conf.rgbFeature == 1){
+//        feature.clear();
+//        feature.resize(32);
+//        for(int i = 0; i < 32; ++i)
+//            feature.at(i) = new cv::Mat(img.at(0)->rows, img.at(0)->cols, CV_8UC1);
 
-        cv::cvtColor(*img.at(0), *(feature.at(0)), CV_RGB2GRAY);
-
-
-        cv::Mat I_x(img.at(0)->rows, img.at(0)->cols, CV_16SC1);
-        cv::Mat I_y(img.at(0)->rows, img.at(0)->cols, CV_16SC1);
+//        cv::cvtColor(*img.at(0), *(feature.at(0)), CV_RGB2GRAY);
 
 
-        cv::Sobel(*(feature.at(0)), I_x, CV_16S, 1, 0);
-        cv::Sobel(*(feature.at(0)), I_y, CV_16S, 0, 1);
+//        cv::Mat I_x(img.at(0)->rows, img.at(0)->cols, CV_16SC1);
+//        cv::Mat I_y(img.at(0)->rows, img.at(0)->cols, CV_16SC1);
 
-        cv::convertScaleAbs(I_x, *(feature[3]), 0.25);
-        cv::convertScaleAbs(I_y, *(feature[4]), 0.25);
 
-        //std::cout << "feature[3]" << std::endl;
+//        cv::Sobel(*(feature.at(0)), I_x, CV_16S, 1, 0);
+//        cv::Sobel(*(feature.at(0)), I_y, CV_16S, 0, 1);
 
-        /* cv::namedWindow("test"); */
-        /* cv::imshow("test",*(feature[3])); */
-        /* cv::waitKey(0); */
-        /* cv::destroyWindow("test"); */
+//        cv::convertScaleAbs(I_x, *(feature[3]), 0.25);
+//        cv::convertScaleAbs(I_y, *(feature[4]), 0.25);
 
-        // Orientation of gradients
-        for(int  y = 0; y < img.at(0)->rows; y++)
-            for(int  x = 0; x < img.at(0)->cols; x++) {
-                // Avoid division by zero
-                float tx = (float)I_x.at<short>(y, x) + (float)copysign(0.000001f, I_x.at<short>(y, x));
-                // Scaling [-pi/2 pi/2] -> [0 80*pi]
-                feature.at(1)->at<uchar>(y, x) = (uchar)(( atan((float)I_y.at<short>(y, x) / tx) + 3.14159265f / 2.0f ) * 80);
-                //std::cout << "scaling" << std::endl;
-                feature.at(2)->at<uchar>(y, x) = (uchar)sqrt((float)I_x.at<short>(y, x)* (float)I_x.at<short>(y, x) + (float)I_y.at<short>(y, x) * (float)I_y.at<short>(y, x));
-            }
+//        //std::cout << "feature[3]" << std::endl;
 
-        // Magunitude of gradients
-        for(int y = 0; y < img.at(0)->rows; y++)
-            for(int x = 0; x < img.at(0)->cols; x++ ) {
-                feature.at(2)->at<uchar>(y, x) = (uchar)sqrt(I_x.at<short>(y, x)*I_x.at<short>(y, x) + I_y.at<short>(y, x) * I_y.at<short>(y, x));
-            }
+//        /* cv::namedWindow("test"); */
+//        /* cv::imshow("test",*(feature[3])); */
+//        /* cv::waitKey(0); */
+//        /* cv::destroyWindow("test"); */
 
-        hog.extractOBin(feature[1], feature[2], feature, 7);
+//        // Orientation of gradients
+//        for(int  y = 0; y < img.at(0)->rows; y++)
+//            for(int  x = 0; x < img.at(0)->cols; x++) {
+//                // Avoid division by zero
+//                float tx = (float)I_x.at<short>(y, x) + (float)copysign(0.000001f, I_x.at<short>(y, x));
+//                // Scaling [-pi/2 pi/2] -> [0 80*pi]
+//                feature.at(1)->at<uchar>(y, x) = (uchar)(( atan((float)I_y.at<short>(y, x) / tx) + 3.14159265f / 2.0f ) * 80);
+//                //std::cout << "scaling" << std::endl;
+//                feature.at(2)->at<uchar>(y, x) = (uchar)sqrt((float)I_x.at<short>(y, x)* (float)I_x.at<short>(y, x) + (float)I_y.at<short>(y, x) * (float)I_y.at<short>(y, x));
+//            }
 
-        // calc I_xx I_yy
-        cv::Sobel(*(feature.at(0)), I_x, CV_16S, 2, 0);
-        cv::Sobel(*(feature.at(0)), I_y, CV_16S, 0, 2);
+//        // Magunitude of gradients
+//        for(int y = 0; y < img.at(0)->rows; y++)
+//            for(int x = 0; x < img.at(0)->cols; x++ ) {
+//                feature.at(2)->at<uchar>(y, x) = (uchar)sqrt(I_x.at<short>(y, x)*I_x.at<short>(y, x) + I_y.at<short>(y, x) * I_y.at<short>(y, x));
+//            }
 
-        cv::convertScaleAbs(I_x, *(feature[5]), 0.25);
-        cv::convertScaleAbs(I_y, *(feature[6]), 0.25);
+//        hog.extractOBin(feature[1], feature[2], feature, 7);
 
-        cv::Mat img_Lab;
-        cv::cvtColor(*img.at(0), img_Lab, CV_RGB2Lab);
-        cv::vector<cv::Mat> tempfeature(3);
+//        // calc I_xx I_yy
+//        cv::Sobel(*(feature.at(0)), I_x, CV_16S, 2, 0);
+//        cv::Sobel(*(feature.at(0)), I_y, CV_16S, 0, 2);
 
-        cv::split(img_Lab, tempfeature);
+//        cv::convertScaleAbs(I_x, *(feature[5]), 0.25);
+//        cv::convertScaleAbs(I_y, *(feature[6]), 0.25);
 
-        for(int i = 0; i < 3; ++i)
-            tempfeature.at(i).copyTo(*(feature.at(i)));
+//        cv::Mat img_Lab;
+//        cv::cvtColor(*img.at(0), img_Lab, CV_RGB2Lab);
+//        cv::vector<cv::Mat> tempfeature(3);
 
-        // min filter
-        for(int c = 0; c < 16; ++c)
-            minFilter(feature[c], feature[c + 16], 5);
+//        cv::split(img_Lab, tempfeature);
 
-        //  for(int i = 0; i < 32; ++i){
-        //      cv::namedWindow("test");
-        //      cv::imshow("test",*feature.at(i));
-        //      cv::waitKey(0);
-        //      cv::destroyWindow("test");
-        //  }
+//        for(int i = 0; i < 3; ++i)
+//            tempfeature.at(i).copyTo(*(feature.at(i)));
 
-        for(int c = 0; c < 16; ++c)
-            maxFilter(feature[c], feature[c], 5);
+//        // min filter
+//        for(int c = 0; c < 16; ++c)
+//            minFilter(feature[c], feature[c + 16], 5);
 
-        if(img.size() > 1){
-//            cv::Mat *tempDepth = new cv::Mat(img.at(1)->clone());
-//            feature.push_back(tempDepth);
-            cv::Mat tempDepth = cv::Mat(img.at(0)->rows, img.at(0)->cols, CV_8U);// = *img.at(1);
-            img.at(1)->convertTo(tempDepth, CV_8U, 255.0 / (double)(conf.maxdist - conf.mindist));
-            cv::Mat temp1, temp2;
-            cv::Mat *integralMat = new cv::Mat(tempDepth.rows + 1, tempDepth.cols + 1, CV_64F);
-            cv::integral(tempDepth, *integralMat, temp1, temp2, CV_64F);
-            feature.push_back(integralMat);
-//            cv::Mat *td = new img.at(1)->clone();
-//            feature.push_back(new img.at(1));
-        }
-        featureFlag = 1;
-    }else{
+//        //  for(int i = 0; i < 32; ++i){
+//        //      cv::namedWindow("test");
+//        //      cv::imshow("test",*feature.at(i));
+//        //      cv::waitKey(0);
+//        //      cv::destroyWindow("test");
+//        //  }
+
+//        for(int c = 0; c < 16; ++c)
+//            maxFilter(feature[c], feature[c], 5);
+
+//        if(img.size() > 1){
+////            cv::Mat *tempDepth = new cv::Mat(img.at(1)->clone());
+////            feature.push_back(tempDepth);
+//            cv::Mat tempDepth = cv::Mat(img.at(0)->rows, img.at(0)->cols, CV_8U);// = *img.at(1);
+//            img.at(1)->convertTo(tempDepth, CV_8U, 255.0 / (double)(conf.maxdist - conf.mindist));
+//            cv::Mat temp1, temp2;
+//            cv::Mat *integralMat = new cv::Mat(tempDepth.rows + 1, tempDepth.cols + 1, CV_64F);
+//            cv::integral(tempDepth, *integralMat, temp1, temp2, CV_64F);
+//            feature.push_back(integralMat);
+////            cv::Mat *td = new img.at(1)->clone();
+////            feature.push_back(new img.at(1));
+//        }
+//        featureFlag = 1;
+    //}else{
       feature.clear();
       //cv::Mat *tempRgb = new cv::Mat(img.at(0)->clone());
       std::vector<cv::Mat> splittedRgb;
@@ -301,7 +314,7 @@ int CDataset::extractFeatures(const CConfig& conf){
 
 //      feature.push_back(new img.at(1)->clone());
       featureFlag  = 1;
-    }
+    //}
 
     return 0;
 }
@@ -312,8 +325,14 @@ int CDataset::releaseFeatures(){
         return -1;
     }
 
-    for(int i = 0; i < feature.size(); ++i)
-        delete feature.at(i);
+    for(int i = 0; i < feature.size(); ++i){
+        if(feature.at(i) != NULL){
+            delete feature.at(i);
+            feature.at(i) = NULL;
+        }
+    }
+
+    featureFlag = 0;
 
     return 0;
 }

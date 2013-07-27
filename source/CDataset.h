@@ -74,7 +74,7 @@ public:
     // loaded images and features
     std::vector<cv::Mat*> img, feature;
 
-    CGlObjLoader *obj;
+    //CGlObjLoader obj;
 
 private:
     // flag for image or features loaded on memory
