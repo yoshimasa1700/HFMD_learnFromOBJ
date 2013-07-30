@@ -90,7 +90,7 @@ private:
 
     //  cv::Rect bBox;
     //  std::vector<std::string> className;
-    //  std::vector<cv::Point> centerPoint;
+    //  std::vector<cv::Poinkt> centerPoint;
     //  std::vector<double> angles;
 
     //void showDataset();

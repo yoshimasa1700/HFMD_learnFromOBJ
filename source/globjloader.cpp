@@ -2,6 +2,26 @@
 
 CGlObjLoader::CGlObjLoader(char* fname)
 {
+//    _left = 0.0;		/* ortho view volume params */
+//    _right = 0.0;
+//    _bottom = 0.0;
+//    _top = 0.0;
+//    _zNear = 0.1;
+//    _zFar = 10.0;
+//    fovy = 45.0;
+//    prev_z = 0;
+
+    //mode = 0;		/* viewing mode */
+
+//     light_ambient[4] = { 1.0, 1.0, 1.0, 1.0 };
+//     light_diffuse[4] = { 1.0, 1.0, 1.0, 1.0 };
+//     light_specular[4] = { 1.0, 1.0, 1.0, 1.0 };
+//     light_position[4] = { 1.0, 1.0, 1.0, 0.0 };
+
+//     mat_ambient[4] = { 0.7, 0.7, 0.7, 0.0 };
+//     mat_diffuse[4] = { 0.8, 0.8, 0.8, 1.0 };
+//     mat_specular[4] = { 1.0, 1.0, 1.0, 1.0 };
+//     high_shininess[1] = { 100.0 };
 
     getMatrix();
     glClearColor(0.0, 0.0, 0.0, 0.0);   // glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE,GLUT_ACTION_GLUTMAINLOOP_RETURNS);
@@ -250,7 +270,7 @@ void CGlObjLoader::Display(void)
     glPushMatrix();
 
     glLoadIdentity();
-    glTranslatef(0, 0, -0.3);	/* to center object down Z */
+    glTranslatef(0, 0, -0.6);	/* to center object down Z */
 
 
 
@@ -271,7 +291,9 @@ void CGlObjLoader::Display(void)
     //glTranslatef(0, 0, 0.3);	/* to center object down Z */
     glPopMatrix();
 
-    glFlush();
+    //glFlush();
+    glutSwapBuffers();
+
 
     frontBuffer =  cv::Mat(480,640,CV_8UC3);
     depthBuffer =  cv::Mat(480,640,CV_32F);
@@ -289,17 +311,17 @@ void CGlObjLoader::Display(void)
     cv::flip(frontBuffer, frontBuffer, 0);
     cv::flip(depthBuffer, depthBuffer, 0);
 
-    depthBuffer = depthBuffer * 255;
+    depthBuffer = depthBuffer * 1050;
 
-    depthBuffer.convertTo(depthBuffer, CV_8U);
+    depthBuffer.convertTo(depthBuffer, CV_16U);
 
     //one = cv::Mat(480,640, CV_8U);
-    cv::Mat one = cv::Mat::ones(480,640, CV_8U) * 255;
+    cv::Mat one = cv::Mat::ones(480,640, CV_16U) * 1050;
 
     depthBuffer = one  - depthBuffer;
 
-//    cv::imwrite("test.png",frontBuffer);
-//    cv::imwrite("depth.png",depthBuffer);
+    cv::imwrite("test.png",frontBuffer);
+    cv::imwrite("depth.png",depthBuffer);
     //std::cout << depthBuffer << std::endl;
 }
 

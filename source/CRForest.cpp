@@ -3,7 +3,7 @@
 #include "CRForest.h"
 
 paramHist& paramHist::operator +(const paramHist& obj){
-    this->row += obj.row;
+    this->roll += obj.roll;
     this->pitch += obj.pitch;
     this->yaw += obj.yaw;
 
@@ -11,7 +11,7 @@ paramHist& paramHist::operator +(const paramHist& obj){
 }
 
 paramHist& paramHist::operator +=(const paramHist& obj){
-    this->row += obj.row;
+    this->roll += obj.roll;
     this->pitch += obj.pitch;
     this->yaw += obj.yaw;
 
@@ -40,7 +40,7 @@ void CRForest::learning(){
         for(int i = 0;i < conf.ntrees; ++i){
             growATree(i);
         } // end tree loop
-   // }
+//    }
 }
 
 void CRForest::growATree(const int treeNum){
@@ -103,32 +103,35 @@ void CRForest::growATree(const int treeNum){
     // initialize class database
     //classDatabase.clear();
 
+    std::cout << "generating appearance from 3D model!" << std::endl;
     // extract pos features and register classDatabase
     for(int i = 0; i < posSet.size(); ++i){
         //std::cout << i << std::endl;
 
         //std::cout << posSet.at(i).rgb << std::endl;
         if(posSet.at(i).loadImage(conf, posSet.at(i).getModelPath(), posSet.at(i).getParam()) == -1 && conf.learningMode != 2){
+            std::cout << "can't load image files" << std::endl;
             exit(-1);
         }
 
         posSet.at(i).extractFeatures(conf);
+
+        //std::cout << posSet.at(i).img.at(1)->type() << std::endl;
         //std::cout << "detayo" << std::endl;
 
         //std::cout << posSet.size() << std::endl;
 
         classDatabase.add(posSet.at(i).getParam()->getClassName(),posSet.at(i).img.at(0)->size(),0);
+        pBar(i,posSet.size(),50);
     }
+    std::cout << std::endl;
     classDatabase.show();
 
-
-    //std::cout << "kokomade kitayo" << std::endl;
     // extract neg features
     for(int i = 0; i < negSet.size(); ++i){
-//        if(negSet.at(i).getModel() != NULL)
-//            negSet.at(i).loadImage(conf, negSet.at(i).getModelPath(), posSet.at(i))
-            negSet.at(i).loadImage(conf);
-
+        //        if(negSet.at(i).getModel() != NULL)
+        //            negSet.at(i).loadImage(conf, negSet.at(i).getModelPath(), posSet.at(i))
+        negSet.at(i).loadImage(conf);
         negSet.at(i).extractFeatures(conf);
     }
 
@@ -137,8 +140,6 @@ void CRForest::growATree(const int treeNum){
 
     extractPosPatches(posSet,posPatch,conf,treeNum,this->classDatabase);
     extractNegPatches(negSet,negPatch,conf);
-
-
 
     std::cout << "extracted pathes" << std::endl;
     std::vector<int> patchClassNum(classDatabase.vNode.size(), 0);
@@ -325,6 +326,8 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
                             if(pos.x > 0 && pos.y > 0 && pos.x < voteImage.at(cl).cols && pos.y < voteImage.at(cl).rows){
                                 double v = result.at(m)->pfg.at(cl) / ( result.size() * result.at(m)->param.at(l).size());
                                 voteImage.at(cl).at<float>(pos.y,pos.x) += v;//(result.at(m)->pfg.at(c) - 0.9);// * 100;//weight * 500;
+                                voteParam2.at(cl)[pos.y][pos.x].roll.at<double>(0,result.at(m)->param.at(l).at(n).getAngle()[0]) += v * 10000;
+                                voteParam2.at(cl)[pos.y][pos.x].pitch.at<double>(0,result.at(m)->param.at(l).at(n).getAngle()[1]) += v * 10000;
                                 voteParam2.at(cl)[pos.y][pos.x].yaw.at<double>(0,result.at(m)->param.at(l).at(n).getAngle()[2]) += v * 10000;
                                 //std::cout << result.at(m)->param.at(l).at(n).getAngle() << std::endl;
                                 //std::cout << v << std::endl;
@@ -430,7 +433,9 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
 
         //voteParam2.at(c)[maxLoc.y][maxLoc.x].showHist();
 
-        cv::minMaxLoc(hist.yaw, &min_pose_value[0], &max_pose_value[0], &min_pose[0], &max_pose[0]);
+        cv::minMaxLoc(hist.roll, &min_pose_value[0], &max_pose_value[0], &min_pose[0], &max_pose[0]);
+        cv::minMaxLoc(hist.pitch, &min_pose_value[1], &max_pose_value[1], &min_pose[1], &max_pose[1]);
+        cv::minMaxLoc(hist.yaw, &min_pose_value[2], &max_pose_value[2], &min_pose[2], &max_pose[2]);
 
         // draw detected class bounding box to result image
         // if you whant add condition of detection threshold, add here
@@ -456,8 +461,10 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
         std::cout << c << " Name : " << classDatabase.vNode.at(c).name <<
                      "\tvote : " << totalVote.at(c) <<
                      " Score : " << voteImage.at(c).at<float>(maxLoc.y, maxLoc.x) <<
-                     " CenterPoint : " << maxLoc <<
-                     " Angle : " << max_pose[0].x << std::endl;
+                     " CenterPoint : " << maxLoc << std::endl <<
+                     " Pose : roll " << max_pose[0].x <<
+                     " pitch : " << max_pose[1].x <<
+                     " yaw : " << max_pose[2].x << std::endl;
 
         // if not in demo mode, output image to file
         if(!conf.demoMode){

@@ -41,6 +41,15 @@ private:
     double roll, pitch, yaw;
 
     /* Ortho (if used) */
+//    double _left;		/* ortho view volume params */
+//    double _right;
+//    double _bottom;
+//    double _top;
+//    double _zNear;
+//    double _zFar;
+//    double fovy;
+//    double prev_z;
+
     double _left = 0.0;		/* ortho view volume params */
     double _right = 0.0;
     double _bottom = 0.0;
@@ -49,6 +58,7 @@ private:
     double _zFar = 10.0;
     double fovy = 45.0;
     double prev_z = 0;
+
 
     /* Modelview Matrix */
     double _matrix[16];		/* model matrix and supporting linear algebra functions */

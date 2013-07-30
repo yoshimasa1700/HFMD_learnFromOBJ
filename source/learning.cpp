@@ -8,7 +8,7 @@ int main(int argc, char* argv[]){
   CConfig		conf;	 // setting
 
   glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH);//GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);//GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
   glutInitWindowSize(640, 480);	/*  Window Size If We Start In Windowed Mode */
   glutCreateWindow("Wavefront Obj File Viewer");
 

@@ -53,7 +53,7 @@ public:
            int		max_d,	//max depth of tree
            int		cp,	//number of center point
            CClassDatabase cDatabase/*,
-                                boost::mt19937	randomGen*/	// random number seed
+                                       boost::mt19937	randomGen*/	// random number seed
            )
         : min_samples(min_s), max_depth(max_d), num_leaf(0), num_cp(cp), classDatabase(cDatabase)
     {
@@ -165,7 +165,7 @@ private:
 
     CClassDatabase classDatabase;
 
-    void normarizationByDepth(CPatch* patch,cv::Mat& rgb)const;//, const CConfig &config)const;
+    //void normarizationByDepth(CPatch* patch,cv::Mat& rgb)const;//, const CConfig &config)const;
 
 };
 
@@ -274,16 +274,41 @@ inline void CRTree::generateTest(int* test, unsigned int max_w, unsigned int max
     case 2:
     {
         // rgb
-        test[0] = rand() % max_w;
-        test[1] = rand() % max_h;
-        test[4] = rand() % max_w;
-        test[5] = rand() % max_h;
-        test[8] = rand() % (max_c - 1);
+        if(config.rgbFeature == 1){
 
-        test[2] = 0;
-        test[3] = 0;
-        test[6] = 0;
-        test[7] = 0;
+            // rgb
+            test[0] = rand() % max_w;
+            test[1] = rand() % max_h;
+            test[4] = rand() % max_w;
+            test[5] = rand() % max_h;
+            test[8] = rand() % (max_c - 1);
+
+            test[2] = 0;
+            test[3] = 0;
+            test[6] = 0;
+            test[7] = 0;
+        }else if(config.rgbFeature != 1){
+            int rgb = rand() % 3;
+
+            test[8] = rgb;
+            // caliculate haar-like features
+            int angle = rand() % 360;
+            int type = rand() % 5;
+            int ratio = (rand() % 30) + 10;
+            if(config.depthFeature == 2)
+                test[0] = angle;
+            else
+                test[0] = 0;
+            test[1] = type;
+            test[2] = ratio;
+
+            test[3] = -1;
+            test[4] = -1;
+            test[5] = -1;
+            test[6] = -1;
+            test[7] = -1;
+
+        }
         break;
     }
     default:
@@ -291,10 +316,10 @@ inline void CRTree::generateTest(int* test, unsigned int max_w, unsigned int max
         break;
     }
 
-//    std::cout << "evaluated test" << std::endl;
-//    for(int i = 0; i < 9; ++i)
-//        std::cout << test[i] << " ";
-//    std::cout << std::endl;
+    //    std::cout << "evaluated test" << std::endl;
+    //    for(int i = 0; i < 9; ++i)
+    //        std::cout << test[i] << " ";
+    //    std::cout << std::endl;
 
 }
 

@@ -113,12 +113,16 @@ void detect(const CRForest &forest, CConfig conf){
 
         for(int j = 0; j < dataSet.at(i).param.size(); ++j)
             for(int k = 0; k < detectR.detectedClass.size(); ++k)
-                result << dataSet.at(i).param.at(j).getClassName() << " " <<
-                          detectR.detectedClass.at(k).name << " " <<
-                          detectR.detectedClass.at(k).score << " " <<
-                          detectR.detectedClass.at(k).error << " " <<
-                          dataSet.at(i).param.at(j).getAngle() << " " <<
-                          detectR.detectedClass.at(k).angle[0] << std::endl;
+	      result << dataSet.at(i).param.at(j).getClassName() << " " <<
+		detectR.detectedClass.at(k).name << " " <<
+		detectR.detectedClass.at(k).score << " " <<
+		detectR.detectedClass.at(k).error << " " <<
+		dataSet.at(i).param.at(j).getAngle()[0] << " " <<
+		dataSet.at(i).param.at(j).getAngle()[1] << " " <<
+		dataSet.at(i).param.at(j).getAngle()[2] << " " <<
+		detectR.detectedClass.at(k).angle[0] << " " <<
+		detectR.detectedClass.at(k).angle[1] << " " <<
+		detectR.detectedClass.at(k).angle[2] << std::endl;
     }
 
     result.close();

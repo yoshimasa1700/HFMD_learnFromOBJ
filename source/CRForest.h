@@ -21,7 +21,7 @@ public:
         //h.resize(3);
 //        for(int i = 0; i < 3; ++i)
 //            h.at(i) = new cv::Mat_<int>::zeros(1, 360);
-        row = cv::Mat_<double>::zeros(1, 360);
+        roll = cv::Mat_<double>::zeros(1, 360);
         pitch = cv::Mat_<double>::zeros(1, 360);
         yaw = cv::Mat_<double>::zeros(1, 360);
     }
@@ -33,7 +33,7 @@ public:
     paramHist& operator+(const paramHist&);
     paramHist& operator+=(const paramHist&);
 
-    cv::Mat_<double> row, pitch, yaw;
+    cv::Mat_<double> roll, pitch, yaw;
     void showHist();
 };
 

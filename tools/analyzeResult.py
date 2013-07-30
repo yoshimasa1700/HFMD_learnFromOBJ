@@ -24,8 +24,8 @@ if(argc > 3):
         os.system('cp %s ./%s'% (inputFileName, argvs[3]))
         
 sta = 0.00
-sto = 0.1
-ste = 0.0001
+sto = 0.001
+ste = 0.000001
 preval = 0.0
 bestAccu = 0.0
 bestTh = 0.0
@@ -79,7 +79,7 @@ for th in drange(sta, sto , ste):
                 if data[0] == data[1]:
                         error += float(data[3])
                         datanum += 1.0
-			angleE = abs(float(data[4]) - float(data[3]))
+			angleE = abs(float(data[9]) - float(data[6]))
 			if angleE < 180.0:
 				angleError += angleE
 			else:
@@ -100,10 +100,10 @@ for th in drange(sta, sto , ste):
 	specificity = float(TN) / (float(TN) + float(FP) + 0.000000001)
         F = 2 * recall * precision / (recall + precision + 0.000001)
 	
-	if (float(TP) + float(TN) + float(FP) + float(FN)) == 0.0:
-		    accuracy = (float(TP) + float(TN)) / ((float(TP) + float(TN) + float(FP) + float(FN)) + 0.00000001)
-        else:
-		    accuracy = 0
+	#if (float(TP) + float(TN) + float(FP) + float(FN)) == 0.0:
+        accuracy = (float(TP) + float(TN)) / ((float(TP) + float(TN) + float(FP) + float(FN)) + 0.000000001)
+        #else:
+        #        accuracy = 0
 	if accuracy > bestAccu:
                 bestAccu = accuracy
                 bestTh = th

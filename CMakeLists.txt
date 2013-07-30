@@ -5,7 +5,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 
 # リリースビルド用オプション
-SET(CMAKE_C_FLAGS "-Wall -O3 -pg")
+SET(CMAKE_C_FLAGS "-Wall -O3 -pg -fpermissive")
 
 # デバッグビルド用オプション
 #SET(CMAKE_C_FLAGS_DEBUG "-g")

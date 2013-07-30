@@ -264,17 +264,12 @@ void extractPosPatches(std::vector<CPosDataset> &posSet,
 
     std::cout << "extracting patch from image" << std::endl;
     for(int l = 0;l < posSet.size(); ++l){
-        std::cout << posSet.at(l).getRgbImagePath() << std::endl;
-//                    cv::namedWindow("test");
-//                    cv::imshow("test", *posSet.at(l).img.at(0));
-//                    cv::waitKey(0);
-//                    cv::destroyWindow("test");
         for(int j = 0; j < posSet.at(l).img.at(0)->cols - conf.p_width; j += conf.stride){
             for(int k = 0; k < posSet.at(l).img.at(0)->rows - conf.p_height; k += conf.stride){
                 tempRect.x = j;
                 tempRect.y = k;
                 pixNum = 0;
-                int centerDepthFlag = 1;
+
 
                 // detect negative patch
 //                if(conf.learningMode != 2 && posSet.at(l).img.at(1)->at<ushort>(k + (conf.p_height / 2) + 1, j + (conf.p_width / 2) + 1 ) != 0){
@@ -299,10 +294,31 @@ void extractPosPatches(std::vector<CPosDataset> &posSet,
                 //tPatch.setPatch(temp, image.at(l), dataSet.at(l), classNum);
 
 
+
                 CPosPatch posTemp(&posSet.at(l),tempRect);
+
+                int centerDepthFlag = 0;
+
+                if(conf.learningMode != 2){
+                    cv::Mat tempDepth1 = *posTemp.getDepth();
+                    cv::Mat tempDepth2 = tempDepth1(tempRect);
+
+                    if(tempDepth2.at<ushort>(conf.p_height / 2 + 1, conf.p_width / 2 + 1) == 0)
+                        centerDepthFlag = 1;
+
+                }
+
                 //if (conf.learningMode == 2){// || pixNum > 0){
-                    tPosPatch.push_back(posTemp);
-                    patchPerClass.at(classNum).push_back(posTemp);
+                if(centerDepthFlag != 1){
+
+                    if(conf.learningMode != 2)
+                        normarizationByDepth(posTemp , conf);
+
+                    if(posTemp.getRoi().width > 5 && posTemp.getRoi().height > 5){
+                        tPosPatch.push_back(posTemp);
+                        patchPerClass.at(classNum).push_back(posTemp);
+                    }
+                }
 
                 //} // if
             }//x
@@ -390,10 +406,32 @@ void extractNegPatches(std::vector<CNegDataset> &negSet,
 //                    pix = calcSumOfDepth(roi,conf);
 //                }
 
+
+
+                //if (conf.learningMode == 2){// || pixNum > 0){
+                //if(centerDepthFlag != 1){
+
                 //tPatch.setPatch(temp, negImage.at(i));
                 //if(conf.learningMode == 2 || pix > 0){
                     CNegPatch negTemp(&negSet.at(i),tempRect);
-                    tNegPatch.push_back(negTemp);
+
+                    int centerDepthFlag = 0;
+
+                    if(conf.learningMode != 2){
+                        cv::Mat tempDepth1 = *negTemp.getDepth();
+                        cv::Mat tempDepth2 = tempDepth1(tempRect);
+
+                        if(tempDepth2.at<ushort>(conf.p_height / 2 + 1, conf.p_width / 2 + 1) == 0)
+                            centerDepthFlag = 1;
+
+                    }
+                    if(centerDepthFlag != 1){
+                        if(conf.learningMode != 2)
+                            normarizationByDepth(negTemp , conf);
+
+                        if(negTemp.getRoi().width > 5 && negTemp.getRoi().height > 5)
+                            tNegPatch.push_back(negTemp);
+                    }
                 //}
             }//x
         }//y
@@ -463,7 +501,10 @@ void extractTestPatches(CTestDataset &testSet,std::vector<CTestPatch> &testPatch
                 //tesetPatch.setPatch(temp, image, dataSet, classNum);
 
                 //tPatch.setPosition(j,k);
-                testPatch.push_back(testTemp);
+                if(testSet.img.size() > 1)
+                    normarizationByDepth(testTemp , conf);
+                if(testTemp.getRoi().width > 5 && testTemp.getRoi().height > 5)
+                    testPatch.push_back(testTemp);
             //}
         }
     }
@@ -562,4 +603,72 @@ int CClassDatabase::search(std::string str) const{
         if(str == vNode.at(i).name)return i;
     }
     return -1;
+}
+
+void normarizationByDepth(CPatch &patch, const CConfig &config){//, const CConfig &config)const {
+    cv::Mat tempDepth = *patch.getDepth();
+
+    cv::Mat depth = tempDepth(patch.getRoi());
+
+    //std::cout << depth << std::endl;
+
+//    cv::namedWindow("test");
+//    cv::imshow("test",depth);
+//    cv::waitKey(0);
+//    cv::destroyAllWindows();
+
+    //std::cout << trainSet.posPatch.at(i).getFeature(32)->at<uchar>(10,10) << std::endl;
+
+    //calc width and height scale
+    double widthSca, heightSca;
+
+    //std::cout << depth.type() << " " << CV_8U << std::endl;
+//    if(depth.type() == CV_8U){
+//        widthSca = config.widthScale * (double)(depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_width;
+//        heightSca = config.heightScale * (double)(depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_height;
+//        //std::cout << "kotti da" << std::endl;
+//        std::cout << "depth : " << (int)depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) << " widht scale : " << widthSca << " height scape : " << heightSca << std::endl;
+
+//    }else{
+        widthSca = config.widthScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_width;
+        heightSca = config.heightScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_height;
+        //std::cout << "depth : " << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << " widht scale : " << widthSca << " height scape : " << heightSca << std::endl;
+
+    //}
+
+    // new window size
+    double realWindowWidth, realWindowHeight;
+
+    realWindowWidth = (double)config.p_width / widthSca;
+    realWindowHeight = (double)config.p_height / heightSca;
+
+    //std::cout << "w " << realWindowWidth << " h " << realWindowHeight << std::endl;
+
+    cv::Rect roi;
+
+    roi.x = patch.getRoi().x + (int)((config.p_width - realWindowHeight) / 2);
+    roi.y = patch.getRoi().y + (int)((config.p_height - realWindowWidth) / 2);
+
+    roi.width = (int)realWindowWidth;
+    roi.height = (int)realWindowHeight;
+
+    //std::cout << roi.x << " " << roi.y << " " << roi.width << " "<< roi.height << std::endl;
+
+    //std::cout << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << std::endl;
+    //std::cout << roi << std::endl;
+
+    if(roi.x < 0) roi.x = 0;
+    if(roi.y < 0) roi.y = 0;
+    if(roi.x + roi.width > patch.getDepth()->cols) roi.x -= roi.width;
+    if(roi.y + roi.height > patch.getDepth()->rows) roi.y -= roi.height;
+
+    //rgb = rgb(roi);
+    patch.setRoi(roi);
+    //cv::resize(rgb,rgb,cv::Size(config.p_width,config.p_height));
+
+
+    //                cv::namedWindow("test");
+    //                cv::imshow("test",rgb);
+    //                cv::waitKey(0);
+    //                cv::destroyAllWindows();
 }

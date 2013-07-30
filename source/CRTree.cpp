@@ -10,6 +10,10 @@ void CRTree::calcHaarLikeFeature(const cv::Mat &patch, const int* test, double &
     int angle = test[0];
     double t1,t2,t3,t4;
 
+//    for(int i = 0; i < 8; ++i)
+//        std::cout << test[i] << " ";
+//    std::cout << std::endl;
+
 
     //boost::timer t;
     //cv::Mat showMat(patch.rows, patch.cols, CV_8U);
@@ -137,7 +141,7 @@ void CRTree::calcHaarLikeFeature(const cv::Mat &patch, const int* test, double &
 
 
 
-        s1 = patch.rows * patch.cols * (double)test[2] / 100.0 * (double)test[2] / 100.0;
+        s1 = patch.rows * patch.cols * (double)test[2] / 100.0;
         s2 = patch.rows * patch.cols - s1;
 
         //        for(int i = 0; i < patch.rows; ++i){
@@ -244,7 +248,13 @@ void CRTree::calcHaarLikeFeature(const cv::Mat &patch, const int* test, double &
     //            std::cout << patch << std::endl;
     //    }
     if(s1 == 0 || s2 == 0){
-        std::cout << "error! can't get enouch space for haar-like feature" << std::endl;
+        std::cout << "error! can't get enough space for haar-like feature" << std::endl;
+        std::cout << s1 << " " << s2 << std::endl;
+
+            for(int i = 0; i < 8; ++i)
+                std::cout << test[i] << " ";
+            std::cout << std::endl;
+
         exit(-1);
     }else{
         p1 /= (double)s1;
@@ -273,8 +283,8 @@ const LeafNode* CRTree::regression(CTestPatch &patch) const {
         cv::Mat ptC;
 
 
-        if(config.learningMode != 2)
-            normarizationByDepth(&patch,ptC);
+//        if(config.learningMode != 2)
+//            normarizationByDepth(&patch,ptC);
 
         cv::Mat tempFeture = *patch.getFeature(pnode[9]);
         ptC = tempFeture(patch.getRoi());
@@ -407,6 +417,8 @@ CRTree::CRTree(const char* filename, const char* databaseName,CConfig &conf):con
                     in >> tempPoint.x;
                     in >> tempPoint.y;
                     double tempAngle[3];
+                    in >> tempAngle[0];
+                    in >> tempAngle[1];
                     in >> tempAngle[2];
 
                     CParamset tempParam;
@@ -895,52 +907,73 @@ bool CRTree::optimizeTest(CTrainSet &SetA, CTrainSet &SetB, CTrainSet &trainSet,
     return found;
 }
 
-void CRTree::normarizationByDepth(CPatch* patch,cv::Mat& rgb)const{//, const CConfig &config)const {
-    cv::Mat tempDepth = *patch->getDepth();
+//void CRTree::normarizationByDepth(CPatch* patch,cv::Mat& rgb)const{//, const CConfig &config)const {
+//    cv::Mat tempDepth = *patch->getDepth();
 
-    cv::Mat depth = tempDepth(patch->getRoi());
+//    cv::Mat depth = tempDepth(patch->getRoi());
 
-    //std::cout << depth << std::endl;
+//    //std::cout << depth << std::endl;
 
-    //                cv::namedWindow("test");
-    //                cv::imshow("test",rgb);
-    //                cv::waitKey(0);
-    //                cv::destroyAllWindows();
+////    cv::namedWindow("test");
+////    cv::imshow("test",depth);
+////    cv::waitKey(0);
+////    cv::destroyAllWindows();
 
-    //std::cout << trainSet.posPatch.at(i).getFeature(32)->at<uchar>(10,10) << std::endl;
+//    //std::cout << trainSet.posPatch.at(i).getFeature(32)->at<uchar>(10,10) << std::endl;
 
-    double widthSca, heightSca;
-    widthSca = config.widthScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_width;
-    heightSca = config.heightScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_height;
+//    //calc width and height scale
+//    double widthSca, heightSca;
 
-    //std::cout << "depth : " << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << " widht scale : " << widthSca << " height scape : " << heightSca << std::endl;
+//    //std::cout << depth.type() << " " << CV_8U << std::endl;
+////    if(depth.type() == CV_8U){
+////        widthSca = config.widthScale * (double)(depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_width;
+////        heightSca = config.heightScale * (double)(depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_height;
+////        //std::cout << "kotti da" << std::endl;
+////        std::cout << "depth : " << (int)depth.at<uchar>(config.p_height / 2 + 1, config.p_width / 2 + 1) << " widht scale : " << widthSca << " height scape : " << heightSca << std::endl;
 
-    double realWindowWidth, realWindowHeight;
+////    }else{
+//        widthSca = config.widthScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_width;
+//        heightSca = config.heightScale * (double)(depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist) / (double)config.p_height;
+//        std::cout << "depth : " << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << " widht scale : " << widthSca << " height scape : " << heightSca << std::endl;
 
-    realWindowWidth = (double)config.p_width / widthSca;
-    realWindowHeight = (double)config.p_height / heightSca;
+//    //}
 
-    cv::Rect roi;
+//    // new window size
+//    double realWindowWidth, realWindowHeight;
 
-    roi.x = (int)((config.p_width - realWindowHeight) / 2);
-    roi.y = (int)((config.p_height - realWindowWidth) / 2);
+//    realWindowWidth = (double)config.p_width / widthSca;
+//    realWindowHeight = (double)config.p_height / heightSca;
 
-    roi.width = (int)realWindowWidth;
-    roi.height = (int)realWindowHeight;
+//    //std::cout << "w " << realWindowWidth << " h " << realWindowHeight << std::endl;
 
-    //std::cout << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << std::endl;
-    //std::cout << roi << std::endl;
+//    cv::Rect roi;
 
-    //rgb = rgb(roi);
-    //patch->setRoi(roi);
-    //cv::resize(rgb,rgb,cv::Size(config.p_width,config.p_height));
+//    roi.x = patch->getRoi().x + (int)((config.p_width - realWindowHeight) / 2);
+//    roi.y = patch->getRoi().y + (int)((config.p_height - realWindowWidth) / 2);
+
+//    roi.width = (int)realWindowWidth;
+//    roi.height = (int)realWindowHeight;
+
+//    //std::cout << roi.x << " " << roi.y << " " << roi.width << " "<< roi.height << std::endl;
+
+//    //std::cout << depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) << std::endl;
+//    //std::cout << roi << std::endl;
+
+//    if(roi.x < 0) roi.x = 0;
+//    if(roi.y < 0) roi.y = 0;
+//    if(roi.x + roi.width > patch->getDepth()->cols) roi.x -= roi.width;
+//    if(roi.y + roi.height > patch->getDepth()->rows) roi.y -= roi.height;
+
+//    //rgb = rgb(roi);
+//    patch->setRoi(roi);
+//    //cv::resize(rgb,rgb,cv::Size(config.p_width,config.p_height));
 
 
-    //                cv::namedWindow("test");
-    //                cv::imshow("test",rgb);
-    //                cv::waitKey(0);
-    //                cv::destroyAllWindows();
-}
+//    //                cv::namedWindow("test");
+//    //                cv::imshow("test",rgb);
+//    //                cv::waitKey(0);
+//    //                cv::destroyAllWindows();
+//}
 
 void CRTree::evaluateTest(std::vector<std::vector<IntIndex> >& valSet, const int* test, CTrainSet &trainSet) {
 
@@ -953,50 +986,62 @@ void CRTree::evaluateTest(std::vector<std::vector<IntIndex> >& valSet, const int
     valSet.clear();
     valSet.resize(2);
 
+    //std::cout << "pos" << std::endl;
+
     //for(unsigned int l = 0; l < TrainSet.size(); ++l)
     {
         valSet[0].resize(trainSet.posPatch.size());
         for(unsigned int i=0;i<trainSet.posPatch.size();++i) {
             cv::Mat ptC;
 
-            if(config.learningMode != 2)
-                normarizationByDepth(&(trainSet.posPatch.at(i)) ,ptC);
+
 
             // pointer to channel
             cv::Mat tempMat = *trainSet.posPatch.at(i).getFeature(test[8]);
+
+            //std::cout << "test[8] = " << test[8] << std::endl;
+
+            //std::cout << "ROI = " << trainSet.posPatch.at(i).getRoi().x << " " << trainSet.posPatch.at(i).getRoi().y << " " << trainSet.posPatch.at(i).getRoi().width << " " << trainSet.posPatch.at(i).getRoi().height << std::endl;
+
+
+
             //std::cout << trainSet.posPatch.at(i).getRoi() << std::endl;
             ptC = tempMat(trainSet.posPatch.at(i).getRoi());//(*(TrainSet[l][i].patch[test[8]]))(TrainSet[l][i].patchRoi);
 
+//            std::cout << ptC << std::endl;
 
-
+//            cv::namedWindow("test");
+//            cv::imshow("test", ptC);
+//            cv::waitKey(0);
+//            cv::destroyWindow("test");
 
             //std::cout << "test[8] " << test[8] << " featureNum " << trainSet.posPatch.at(i).getFeatureNum() - 1 << std::endl;
-            if(test[8] < trainSet.posPatch.at(i).getFeatureNum() - 1 && config.rgbFeature != 1){
+            if( (test[8] < trainSet.posPatch.at(i).getFeatureNum() - 1 && config.rgbFeature != 1) || test[8] == trainSet.posPatch.at(i).getFeatureNum() - 1){
 
                 calcHaarLikeFeature(ptC,test,p1,p2);
-            }else if(test[8] == trainSet.posPatch.at(i).getFeatureNum() - 1){
+//            }else if(test[8] == trainSet.posPatch.at(i).getFeatureNum() - 1){
 
-                //std::cout << "yobareatyo" << std::endl;
-                calcHaarLikeFeature(ptC,test,p1,p2);
-                //std::cout << "this is for debug hyahhaaaaaaaaaaaaaaaaaaaa" << std::endl;
-                //int dummy;
-                //std::cin >> dummy;
-                //                p1 = 0;
-                //                p2 = 0;
-                //                for(int j = 0;j < test[2]; ++j){
-                //                    for(int k = 0; k < test[3]; ++k)
-                //                        p1 += (int)ptC.at<uchar>(k + test[1],j +  test[0]);
-                //                }
+//                //std::cout << "yobareatyo" << std::endl;
+//                calcHaarLikeFeature(ptC,test,p1,p2);
+//                //std::cout << "this is for debug hyahhaaaaaaaaaaaaaaaaaaaa" << std::endl;
+//                //int dummy;
+//                //std::cin >> dummy;
+//                //                p1 = 0;
+//                //                p2 = 0;
+//                //                for(int j = 0;j < test[2]; ++j){
+//                //                    for(int k = 0; k < test[3]; ++k)
+//                //                        p1 += (int)ptC.at<uchar>(k + test[1],j +  test[0]);
+//                //                }
 
-                //                for(int j = 0;j < test[6]; ++j){
-                //                    for(int k = 0; k < test[7]; ++k)
-                //                        p2 += (int)ptC.at<uchar>(k + test[5],j +  test[4]);
-                //                }
+//                //                for(int j = 0;j < test[6]; ++j){
+//                //                    for(int k = 0; k < test[7]; ++k)
+//                //                        p2 += (int)ptC.at<uchar>(k + test[5],j +  test[4]);
+//                //                }
 
-                //                for(int w = 0; w < 9; ++w)
-                //                    std::cout << test[w] << " ";
-                //                std::cout << std::endl;
-                //                std::cout << p1 << " " << p2 << std::endl;
+//                //                for(int w = 0; w < 9; ++w)
+//                //                    std::cout << test[w] << " ";
+//                //                std::cout << std::endl;
+//                //                std::cout << p1 << " " << p2 << std::endl;
 
 
             }else{
@@ -1015,14 +1060,16 @@ void CRTree::evaluateTest(std::vector<std::vector<IntIndex> >& valSet, const int
         sort( valSet[0].begin(), valSet[0].end() , IntIndex::lessVal);
     }
 
+    //std::cout << "neg" << std::endl;
+
     {
         valSet[1].resize(trainSet.negPatch.size());
 
         for(unsigned int i=0;i<trainSet.negPatch.size();++i) {
             cv::Mat ptC;
 
-            if(config.learningMode != 2)
-                normarizationByDepth(&(trainSet.negPatch.at(i)) ,ptC);
+//            if(config.learningMode != 2)
+//                normarizationByDepth(&(trainSet.negPatch.at(i)) ,ptC);
 
             // pointer to channel
             cv::Mat tempMat = *trainSet.negPatch.at(i).getFeature(test[8]);

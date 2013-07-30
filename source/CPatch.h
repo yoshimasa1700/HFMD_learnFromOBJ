@@ -22,6 +22,8 @@ public:
 
     cv::Mat* getFeature(int featureNum) const{return data->feature.at(featureNum);}
     cv::Mat* getDepth() const{return data->img.at(1);}
+
+//    int centerPointValue(){return data->img.at(1)->at<ushort>()}
 private:
     cv::Rect roi;
     double scale;
@@ -39,6 +41,7 @@ public:
     int getFeatureNum()const{return pData->feature.size();}
     CParamset getParam()const{return *(pData->getParam());}
     std::string getRgbImageFilePath(){return pData->getRgbImagePath();}
+    cv::Mat* getDepth() const{return pData->img.at(1);}
 private:
     CPosDataset *pData;
 };
@@ -48,6 +51,7 @@ public:
     CNegPatch(CNegDataset *neg, cv::Rect r) : nData(neg), CPatch(neg, r){}
     CNegPatch(){}
     int getFeatureNum()const{return nData->feature.size();}
+    cv::Mat* getDepth() const{return nData->img.at(1);}
     virtual ~CNegPatch(){}
 
 private:
