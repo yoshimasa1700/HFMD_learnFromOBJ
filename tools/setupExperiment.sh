@@ -14,6 +14,7 @@ needFolder+=("negdata")
 needFolder+=("trees")
 needFolder+=("testdata")
 needFolder+=("tools")
+needFolder+=("models")
 
 echo ${needFile[@]}
 echo ${needFolder[@]}
