@@ -108,7 +108,7 @@ for th in drange(sta, sto , ste):
                 bestAccu = accuracy
                 bestTh = th
 		bestError  = error
-		bestAngleError = angleE
+		bestAngleError = angleError
 
 	print "precision = %lf , recall = %lf , F = %lf , accuracy = %lf , specificity = %lf" % (precision,recall, F, accuracy, specificity)
 

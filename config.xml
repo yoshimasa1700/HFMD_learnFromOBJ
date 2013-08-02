@@ -37,9 +37,9 @@ n<pheight>20</pheight>
 <!-- feature channel number-->
 <featurechannel>2</featurechannel>
 <!-- extract patch ratio-->
-<patchratio>3000</patchratio>
+<patchratio>500</patchratio>
 <!-- Stride -->
-<stride>1</stride>
+<stride>5</stride>
 <!-- Offset of tree-->
 <offTree>0</offTree>
 <!-- test data path -->
@@ -51,7 +51,7 @@ n<pheight>20</pheight>
 <testmode>1</testmode>
 <detectthreshold>3.0</detectthreshold>
 <traindatalistname>dataListInst2.0.txt</traindatalistname>
-<testdatalistname>testDataList.txt</testdatalistname>
+<testdatalistname>testDataListInst2.0.txt</testdatalistname>
 <showgrandtruth>1</showgrandtruth>
 <negativedatapath>negdata</negativedatapath>
 <negativedatafolderlist>negDataFolderList.txt</negativedatafolderlist>
