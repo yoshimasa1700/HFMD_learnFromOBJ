@@ -39,13 +39,19 @@ CGlObjLoader::CGlObjLoader(char* fname)
 
     strncpy(filename, fname ,sizeof(filename));	/* get the last arg as the file always */
 
+    //std::cout << "kokomade?" << std::endl;
     if (!pmodel) {		/* load up the model */
+//#pragma omp critical
         pmodel = glmReadOBJ(filename);
         if (!pmodel) {
             printf("\nUsage: objviewV2 <-s> <obj filename>\n");
             exit(0);
         }
+
+        //std::cout << "load shita yo" << std::endl;
+//#pragma omp critical
         glmUnitize(pmodel);
+//#pragma omp critical
         glmVertexNormals(pmodel, 90.0, GL_TRUE);
     }
 
