@@ -34,12 +34,11 @@ private:
 class CPosPatch : public CPatch{
 public:
     CPosPatch(CPosDataset *pos, cv::Rect r) : pData(pos), CPatch(pos, r){
-
-
-    }
-    CPosPatch(){
         relativePosition = pData->getParam()->getCenterPoint() - cv::Point(getRoi().x + getRoi().width / 2 + 1, getRoi().y + getRoi().height / 2 + 1);
         std::cout << relativePosition << std::endl;
+    }
+    CPosPatch(){
+
     }
     virtual ~CPosPatch(){}
 
@@ -50,6 +49,9 @@ public:
     std::string getRgbImageFilePath(){return pData->getRgbImagePath();}
     cv::Mat* getDepth() const{return pData->img.at(1);}
     void setCenterPoint(cv::Point nCenter){pData->setCenterPoint(nCenter);}
+
+    cv::Point getRelativePosition(){return relativePosition;}
+    void setRelativePosition(const cv::Point p){relativePosition = p;}
 
 private:
     CPosDataset *pData;

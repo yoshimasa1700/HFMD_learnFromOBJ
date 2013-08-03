@@ -39,15 +39,20 @@ void loadTrainObjFile(CConfig conf, std::vector<CPosDataset> &posSet)
 
     int modelNum = 0;
     modelList >> modelNum;
+    modelPath.resize(modelNum);
+    modelName.resize(modelNum);
 
     for(int i = 0; i < modelNum; ++i){
         std::string tempName;
         modelList >> tempName;
-        modelPath.push_back(conf.modelListFolder +PATH_SEP + tempName);
+        modelPath[i] = conf.modelListFolder +PATH_SEP + tempName;
         std::string tempClass;
         modelList >> tempClass;
-        modelName.push_back(tempClass);
+        modelName[i] = tempClass;
     }
+
+    posSet.resize(modelNum * conf.imagePerTree);
+
     for(int j = 0; j < modelNum; ++j){
         for(int i = 0; i < conf.imagePerTree; ++i){
             CPosDataset posTemp;
@@ -59,10 +64,9 @@ void loadTrainObjFile(CConfig conf, std::vector<CPosDataset> &posSet)
             posTemp.setAngle(tempAngle);
             posTemp.setCenterPoint(cv::Point(320,240));
 
-            posSet.push_back(posTemp);
+            posSet[j * i] = posTemp;
         }
     }
-
     modelList.close();
 }
 
@@ -195,6 +199,7 @@ void loadTrainNegFile(CConfig conf, std::vector<CNegDataset> &negSet)
     std::ifstream in_F((conf.negDataPath + PATH_SEP + conf.negFolderList).c_str());
     in_F >> n_folders;
     std::cout << conf.negDataPath + PATH_SEP + conf.negFolderList << std::endl;
+
 
     for(int j = 0; j < n_folders; ++j){
         int n_files;
@@ -691,23 +696,19 @@ void normarizationByDepth(CPatch &patch, const CConfig &config){//, const CConfi
 
 void normarizationCenterPointP(CPosPatch &patch, const CConfig &config){//, const CConfig &config)const {
     cv::Mat tempDepth = *patch.getDepth();
-
     cv::Mat depth = tempDepth(patch.getRoi());
-
     //calc width and height scale
     double centerDepth = depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist;
-
-    cv::Point currentP = patch.getCenterPoint();
+    cv::Point currentP = patch.getRelativePosition();
 
     std::cout << "current p " << currentP << std::endl;
 
 //    currentP.x = currentP.x * 10;
     currentP.y *= 1000;
-//    currentP.x /= centerDepth;
-//    currentP.y /= centerDepth;
+    currentP.x /= centerDepth;
+    currentP.y /= centerDepth;
 
     std::cout << "heknak go " << currentP << std::endl;
-
-    patch.setCenterPoint(currentP);
+    patch.setRelativePosition(currentP);
 }
 

@@ -57,7 +57,7 @@ n<pheight>20</pheight>
 <negativedatafolderlist>negDataFolderList.txt</negativedatafolderlist>
 <negativedatalist>negDataList.txt</negativedatalist>
 <negativemode>1</negativemode>
-<posnegpatchratio>2.0</posnegpatchratio>
+<posnegpatchratio>3.0</posnegpatchratio>
 <activepatchratio>1.0</activepatchratio>
 <mindistance>350</mindistance>
 <maxdistance>1400</maxdistance>

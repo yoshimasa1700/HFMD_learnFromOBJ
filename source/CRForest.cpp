@@ -31,15 +31,12 @@ double euclideanDist(cv::Point p, cv::Point q)
 }
 
 void CRForest::learning(){
-    // grow each tree
-    // if you want to fix this program multi thread
-    // you should change below
-//#pragma omp parallel
-//    {
-//#pragma omp for
-        for(int i = 0;i < conf.ntrees; ++i){
-            growATree(i);
-        } // end tree loop
+    //#pragma omp parallel
+    //    {
+    //#pragma omp for
+    for(int i = 0;i < conf.ntrees; ++i){
+        growATree(i);
+    } // end tree loop
     //}
 }
 
@@ -80,19 +77,19 @@ void CRForest::growATree(const int treeNum){
         tempClassDatabase.add(posSet.at(i).getParam()->getClassName(),cv::Size(),0);
     }
 
-//    std::vector<CPosDataset> tempPosSet(0);
-//    int currentClass = treeNum % tempClassDatabase.vNode.size();
+    //    std::vector<CPosDataset> tempPosSet(0);
+    //    int currentClass = treeNum % tempClassDatabase.vNode.size();
 
     //std::cout << "okashiina" << std::endl;
-//    for(int i = 0; i < posSet.size(); ++i){
-//        if(tempClassDatabase.search(posSet.at(i).getClassName()) == currentClass){
-//            tempPosSet.push_back(posSet.at(i));
-//            //std::cout << "teketeke" << std::endl;
-//        }else{
-//            negSet.push_back(convertPosToNeg2(posSet.at(i)));
-//            //std::cout << "negneg" << std::endl;
-//        }
-//    }
+    //    for(int i = 0; i < posSet.size(); ++i){
+    //        if(tempClassDatabase.search(posSet.at(i).getClassName()) == currentClass){
+    //            tempPosSet.push_back(posSet.at(i));
+    //            //std::cout << "teketeke" << std::endl;
+    //        }else{
+    //            negSet.push_back(convertPosToNeg2(posSet.at(i)));
+    //            //std::cout << "negneg" << std::endl;
+    //        }
+    //    }
 
     //posSet = tempPosSet;
 
@@ -109,13 +106,13 @@ void CRForest::growATree(const int treeNum){
         //std::cout << i << std::endl;
 
         //std::cout << posSet.at(i).rgb << std::endl;
-//#pragma omp critical
+        //#pragma omp critical
         posSet.at(i).loadImage(conf, posSet.at(i).getModelPath(), posSet.at(i).getParam());
 
         //        if(imgload == -1 && conf.learningMode != 2){
-//            std::cout << "can't load image files" << std::endl;
-//            exit(-1);
-//        }
+        //            std::cout << "can't load image files" << std::endl;
+        //            exit(-1);
+        //        }
 
         posSet.at(i).extractFeatures(conf);
 
@@ -152,7 +149,7 @@ void CRForest::growATree(const int treeNum){
 
     // grow tree
     //vTrees.at(treeNum)->growTree(vPatches, 0,0, (float)(vPatches.at(0).size()) / ((float)(vPatches.at(0).size()) + (float)(vPatches.at(1).size())), conf, gen, patchClassNum);
-//#pragma omp parallel
+    //#pragma omp parallel
     tree->growTree(posPatch,negPatch, 0,0, ((float)posPatch.size() / (float)(posPatch.size() + negPatch.size())), conf, patchClassNum);
 
     //    cv::namedWindow("test");
@@ -193,28 +190,28 @@ void CRForest::growATree(const int treeNum){
     posPatch.clear();
     negPatch.clear();
 
-//    for(int i = 0; i< posSet.size(); ++i){
-//        cv::namedWindow("test");
-//        cv::imshow("test", *posSet.at(i).img.at(0));
-//        cv::waitKey(0);
-//        cv::destroyWindow("test");
-//    }
+    //    for(int i = 0; i< posSet.size(); ++i){
+    //        cv::namedWindow("test");
+    //        cv::imshow("test", *posSet.at(i).img.at(0));
+    //        cv::waitKey(0);
+    //        cv::destroyWindow("test");
+    //    }
 
 
-//    for(int i = 0; i < posSet.size(); ++i){
-//        posSet.at(i).releaseImage();
-//    }
+    //    for(int i = 0; i < posSet.size(); ++i){
+    //        posSet.at(i).releaseImage();
+    //    }
 
-//    for(int i = 0; i< posSet.size(); ++i){
-//        cv::namedWindow("test");
-//        cv::imshow("test", *posSet.at(i).feature.at(0));
-//        cv::waitKey(0);
-//        cv::destroyWindow("test");
-//    }
+    //    for(int i = 0; i< posSet.size(); ++i){
+    //        cv::namedWindow("test");
+    //        cv::imshow("test", *posSet.at(i).feature.at(0));
+    //        cv::waitKey(0);
+    //        cv::destroyWindow("test");
+    //    }
 
-//    for(int i = 0; i < posSet.size(); ++i){
-//        posSet.at(i).releaseFeatures();
-//    }
+    //    for(int i = 0; i < posSet.size(); ++i){
+    //        posSet.at(i).releaseFeatures();
+    //    }
 
     posSet.clear();
     negSet.clear();

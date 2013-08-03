@@ -699,13 +699,13 @@ void CRTree::makeLeaf(CTrainSet &trainSet, float pnratio, int node) {
             CParamset tParam;
             tParam = patchPerClass.at(i).at(j).getParam();
 
-            cv::Point tCenterPoint = tParam.getCenterPoint();
+            cv::Point tCenterPoint = patchPerClass[i][j].getRelativePosition();
 
-            tCenterPoint.x -= patchPerClass.at(i).at(j).getRoi().x;
-            tCenterPoint.x -= (patchPerClass.at(i).at(j).getRoi().width) / 2;
+//            tCenterPoint.x -= patchPerClass.at(i).at(j).getRoi().x;
+//            tCenterPoint.x -= (patchPerClass.at(i).at(j).getRoi().width) / 2;
 
-            tCenterPoint.y -= patchPerClass.at(i).at(j).getRoi().y;
-            tCenterPoint.y -= (patchPerClass.at(i).at(j).getRoi().height) / 2;
+//            tCenterPoint.y -= patchPerClass.at(i).at(j).getRoi().y;
+//            tCenterPoint.y -= (patchPerClass.at(i).at(j).getRoi().height) / 2;
 
             tParam.setCenterPoint(tCenterPoint);
 
