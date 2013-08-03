@@ -324,8 +324,24 @@ CDetectionResult CRForest::detection(CTestDataset &testSet) const{
 
                         for(int n = 0; n < result.at(m)->param.at(cl).size(); ++n){
                             cv::Point patchSize(conf.p_height/2,conf.p_width/2);
-                            cv::Point pos(testPatch.at(j).getRoi().x + patchSize.x +  result.at(m)->param.at(cl).at(n).getCenterPoint().x,
-                                          testPatch.at(j).getRoi().y + patchSize.y +  result.at(m)->param.at(cl).at(n).getCenterPoint().y);
+
+                            cv::Point rPoint = result.at(m)->param.at(cl).at(n).getCenterPoint();
+
+                            if(conf.learningMode != 2){
+                                cv::Mat tempDepth = *testPatch[j].getDepth();
+                                cv::Rect tempRect = testPatch[j].getRoi();
+                                cv::Mat realDepth = tempDepth(tempRect);
+                                double centerDepth = realDepth.at<ushort>(tempRect.height / 2 + 1, tempRect.width / 2 + 1) + conf.mindist;
+
+                                rPoint *= centerDepth;
+                                rPoint.x /= 1000;
+                                rPoint.y /= 1000;
+
+
+                            }
+
+                            cv::Point pos(testPatch.at(j).getRoi().x + patchSize.x +  rPoint.x,
+                                          testPatch.at(j).getRoi().y + patchSize.y +  rPoint.y);
                             // vote to result image
                             if(pos.x > 0 && pos.y > 0 && pos.x < voteImage.at(cl).cols && pos.y < voteImage.at(cl).rows){
                                 double v = result.at(m)->pfg.at(cl) / ( result.size() * result.at(m)->param.at(l).size());

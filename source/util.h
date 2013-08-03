@@ -26,6 +26,8 @@
 extern boost::lagged_fibonacci1279 genPose;
 
 void normarizationByDepth(CPatch &patch,const CConfig &conf);
+void normarizationCenterPointP(CPosPatch &patch, const CConfig &config);
+void normarizationCenterPointT(CTestPatch &patch, const CConfig &config);
 
 class databaseNode{
 public:

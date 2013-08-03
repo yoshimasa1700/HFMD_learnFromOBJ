@@ -311,8 +311,10 @@ void extractPosPatches(std::vector<CPosDataset> &posSet,
                 //if (conf.learningMode == 2){// || pixNum > 0){
                 if(centerDepthFlag != 1){
 
-                    if(conf.learningMode != 2)
+                    if(conf.learningMode != 2){
+                        normarizationCenterPointP(posTemp, conf);
                         normarizationByDepth(posTemp , conf);
+                    }
 
                     if(posTemp.getRoi().width > 5 && posTemp.getRoi().height > 5){
                         tPosPatch.push_back(posTemp);
@@ -500,11 +502,25 @@ void extractTestPatches(CTestDataset &testSet,std::vector<CTestPatch> &testPatch
                 CTestPatch testTemp(&testSet,tempRect);
                 //tesetPatch.setPatch(temp, image, dataSet, classNum);
 
+
+                int centerDepthFlag = 0;
+
+                if(conf.learningMode != 2){
+                    cv::Mat tempDepth1 = *testTemp.getDepth();
+                    cv::Mat tempDepth2 = tempDepth1(tempRect);
+
+                    if(tempDepth2.at<ushort>(conf.p_height / 2 + 1, conf.p_width / 2 + 1) == 0)
+                        centerDepthFlag = 1;
+
+                }
+
                 //tPatch.setPosition(j,k);
-                if(testSet.img.size() > 1)
-                    normarizationByDepth(testTemp , conf);
-                if(testTemp.getRoi().width > 5 && testTemp.getRoi().height > 5)
-                    testPatch.push_back(testTemp);
+                if(centerDepthFlag != 1){
+                    if(testSet.img.size() > 1)
+                        normarizationByDepth(testTemp , conf);
+                    if(testTemp.getRoi().width > 5 && testTemp.getRoi().height > 5)
+                        testPatch.push_back(testTemp);
+                }
             //}
         }
     }
@@ -672,3 +688,26 @@ void normarizationByDepth(CPatch &patch, const CConfig &config){//, const CConfi
     //                cv::waitKey(0);
     //                cv::destroyAllWindows();
 }
+
+void normarizationCenterPointP(CPosPatch &patch, const CConfig &config){//, const CConfig &config)const {
+    cv::Mat tempDepth = *patch.getDepth();
+
+    cv::Mat depth = tempDepth(patch.getRoi());
+
+    //calc width and height scale
+    double centerDepth = depth.at<ushort>(config.p_height / 2 + 1, config.p_width / 2 + 1) + config.mindist;
+
+    cv::Point currentP = patch.getCenterPoint();
+
+    std::cout << "current p " << currentP << std::endl;
+
+//    currentP.x = currentP.x * 10;
+    currentP.y *= 1000;
+//    currentP.x /= centerDepth;
+//    currentP.y /= centerDepth;
+
+    std::cout << "heknak go " << currentP << std::endl;
+
+    patch.setCenterPoint(currentP);
+}
+

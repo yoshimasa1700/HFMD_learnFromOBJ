@@ -3,7 +3,7 @@
   <!-- Path to trees -->
   <treepath>trees/treetable</treepath>
   <!-- Number of trees -->
-<ntree>40</ntree>
+<ntree>20</ntree>
 <!-- Patch width -->
 <pwidth>20</pwidth>
 <!-- Patch height -->

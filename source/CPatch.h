@@ -9,7 +9,7 @@ class CPatch
 public:
     CPatch(CDataset *d, cv::Rect r) : data(d), roi(r){
         //cv::Mat* depthImage = d->img.at(1);
-
+        //relativePosition.x = data->getDepthImagePath() - roi.x + roi.width / 2 + 1
     }
     CPatch(){}
     virtual ~CPatch(){}
@@ -28,12 +28,19 @@ private:
     cv::Rect roi;
     double scale;
     CDataset *data;
+
 };
 
 class CPosPatch : public CPatch{
 public:
-    CPosPatch(CPosDataset *pos, cv::Rect r) : pData(pos), CPatch(pos, r){}
-    CPosPatch(){}
+    CPosPatch(CPosDataset *pos, cv::Rect r) : pData(pos), CPatch(pos, r){
+
+
+    }
+    CPosPatch(){
+        relativePosition = pData->getParam()->getCenterPoint() - cv::Point(getRoi().x + getRoi().width / 2 + 1, getRoi().y + getRoi().height / 2 + 1);
+        std::cout << relativePosition << std::endl;
+    }
     virtual ~CPosPatch(){}
 
     std::string getClassName()const{return pData->getParam()->getClassName();}
@@ -42,8 +49,11 @@ public:
     CParamset getParam()const{return *(pData->getParam());}
     std::string getRgbImageFilePath(){return pData->getRgbImagePath();}
     cv::Mat* getDepth() const{return pData->img.at(1);}
+    void setCenterPoint(cv::Point nCenter){pData->setCenterPoint(nCenter);}
+
 private:
     CPosDataset *pData;
+    cv::Point relativePosition;
 };
 
 class CNegPatch : public CPatch{
@@ -65,6 +75,7 @@ public:
     virtual ~CTestPatch(){}
     //cv::Rect getPatchRoi(){return this->getRoi(
     int getFeatureNum()const {return tData->feature.size();}
+    cv::Mat* getDepth() const{return tData->img.at(1);}
 
 private:
     CTestDataset *tData;
