@@ -1,0 +1,885 @@
+
+tools/createTestListInst.sh,0
+
+tools/oneVsAllExamInstanceL.sh,0
+
+tools/createFolderList.sh,0
+
+tools/oneVsAllExamAna.sh,0
+
+tools/#analyzeResult.py#,2100
+argvs = sys.argvargvs8,97
+argc = len(argvs)argc9,114
+        inputFileName = argvs[1]inputFileName14,149
+        inputFileName = './detectionResult.txt'inputFileName16,188
+        outputFileName = argvs[2]outputFileName19,251
+        outputFileName = './analyzedResult.txt'outputFileName21,291
+sta = 0.00sta26,422
+sto = 0.1sto27,433
+ste = 0.0001ste28,443
+preval = 0.0preval29,456
+bestAccu = 0.0bestAccu30,469
+bestTh = 0.0bestTh31,484
+auc = 0.0auc32,497
+bestError = 0.0bestError34,508
+bestAngleError = 0.0bestAngleError35,524
+def drange(start, stop, step):drange37,546
+TPPERT = []TPPERT43,628
+FPPERT = []FPPERT44,640
+FPPERT_SUM = 0FPPERT_SUM45,652
+outFile = open(outputFileName, 'w')outFile46,667
+        resultFile = open(inputFileName)resultFile50,755
+        dataonly = resultFile.readline()dataonly51,796
+        data = []data52,837
+        TP = 0TP53,855
+        TN = 0TN54,870
+        FP = 0FP55,885
+        FN = 0FN56,900
+	TE = 0TE58,916
+	datanum = 0datanum60,925
+	error=0.0error61,938
+	angleError = 0.0angleError63,950
+                data = line.split()data67,995
+			angleE = abs(float(data[4]) - float(data[3]))angleE82,1534
+		error = error / datanumerror91,1736
+		angleE = angleE / datanumangleE92,1762
+        precision = float(TP) / ( float(TP) + float(FP) + 0.0000001)precision96,1889
+        sensitivity = float(TP) / ( float(TP) + float(FN) + 0.000001)sensitivity97,1958
+        recall = float(TP) / (float(TP) + float(FN) + 0.0000001)recall98,2028
+	specificity = float(TN) / (float(TN) + float(FP) + 0.000000001)specificity100,2094
+        F = 2 * recall * precision / (recall + precision + 0.000001)F101,2159
+		    accuracy = (float(TP) + float(TN)) / ((float(TP) + float(TN) + float(FP) + float(FN)) + 0.00000001)accuracy104,2290
+		    accuracy = 0accuracy106,2410
+                bestAccu = accuracybestAccu108,2454
+                bestTh = thbestTh109,2490
+		bestError  = errorbestError110,2518
+		bestAngleError = angleEbestAngleError111,2539
+        preval = specificitypreval119,2928
+
+tools/createWholeListInst.sh,0
+
+tools/createPosList.sh,0
+
+tools/paramChangeAna.sh,0
+
+tools/paramChangeExam.sh,0
+
+tools/createWholeList.sh,0
+
+tools/forRgbdDatasetTest.py,107
+argvs = sys.argvargvs7,65
+argc = len(args)argc8,82
+    folderListName = argvs[1]folderListName11,114
+
+tools/createTestList.sh,0
+
+tools/createNegList.sh,0
+
+tools/forRgbdDatasetTest.sh,0
+
+tools/oneVsAllExamInstanceLAna.sh,0
+
+tools/changeConfig.sh,0
+
+tools/setupExperiment.sh,0
+
+tools/oneVsAllExam.sh,0
+
+tools/analyzeResult.py,2070
+argvs = sys.argvargvs8,97
+argc = len(argvs)argc9,114
+        inputFileName = argvs[1]inputFileName14,149
+        inputFileName = './detectionResult.txt'inputFileName16,188
+        outputFileName = argvs[2]outputFileName19,251
+        outputFileName = './analyzedResult.txt'outputFileName21,291
+sta = 0.00sta26,422
+sto = 0.5sto27,433
+ste = 0.0001ste28,443
+preval = 0.0preval29,456
+bestAccu = 0.0bestAccu30,469
+bestTh = 0.0bestTh31,484
+auc = 0.0auc32,497
+bestError = 0.0bestError34,508
+bestAngleError = 0.0bestAngleError35,524
+def drange(start, stop, step):drange37,546
+TPPERT = []TPPERT43,628
+FPPERT = []FPPERT44,640
+FPPERT_SUM = 0FPPERT_SUM45,652
+outFile = open(outputFileName, 'w')outFile46,667
+        resultFile = open(inputFileName)resultFile50,755
+        dataonly = resultFile.readline()dataonly51,796
+        data = []data52,837
+        TP = 0TP53,855
+        TN = 0TN54,870
+        FP = 0FP55,885
+        FN = 0FN56,900
+	TE = 0TE58,916
+	datanum = 0datanum60,925
+	error=0.0error61,938
+	angleError = 0.0angleError63,950
+                data = line.split()data67,995
+			angleE = abs(float(data[9]) - float(data[6]))angleE82,1534
+		error = error / datanumerror91,1736
+		angleE = angleE / datanumangleE92,1762
+        precision = float(TP) / ( float(TP) + float(FP) + 0.0000001)precision96,1889
+        sensitivity = float(TP) / ( float(TP) + float(FN) + 0.000001)sensitivity97,1958
+        recall = float(TP) / (float(TP) + float(FN) + 0.0000001)recall98,2028
+	specificity = float(TN) / (float(TN) + float(FP) + 0.000000001)specificity100,2094
+        F = 2 * recall * precision / (recall + precision + 0.000001)F101,2159
+        accuracy = (float(TP) + float(TN)) / ((float(TP) + float(TN) + float(FP) + float(FN)) + 0.000000001)accuracy104,2291
+                bestAccu = accuracybestAccu108,2470
+                bestTh = thbestTh109,2506
+		bestError  = errorbestError110,2534
+		bestAngleError = angleErrorbestAngleError111,2555
+        preval = specificitypreval119,2948
+
+Makefile,348
+SUFFIXES =SUFFIXES15,456
+SHELL = /bin/shSHELL30,811
+CMAKE_COMMAND = /usr/bin/cmakeCMAKE_COMMAND33,852
+RM = /usr/bin/cmake -E remove -fRM36,916
+EQUALS = =EQUALS39,985
+CMAKE_SOURCE_DIR = /home/masahiko/Programs/HFMD_learnFromOBJCMAKE_SOURCE_DIR42,1054
+CMAKE_BINARY_DIR = /home/masahiko/Programs/HFMD_learnFromOBJCMAKE_BINARY_DIR45,1172
+
+source/CRTree.h,2505
+#define __CRTREE____CRTREE__2,19
+struct IntIndex {IntIndex10,134
+    int val;val11,152
+    unsigned int index;index12,165
+    bool operator<(const IntIndex& a) const { return val<a.val; }operator <13,189
+    static bool lessVal(const IntIndex& rLeft, const IntIndex& rRight) { return rLeft.val < rRight.val; }lessVal14,255
+class LeafNodeLeafNode17,365
+    LeafNode(){};LeafNode20,390
+    ~LeafNode(){};~LeafNode21,408
+    std::vector<float> pfg;pfg30,705
+    std::vector<std::vector<CParamset> > param; // per class per patchparam33,839
+class CTrainSet{CTrainSet36,914
+    CTrainSet(){}CTrainSet38,939
+    CTrainSet(std::vector<CPosPatch> &pos, std::vector<CNegPatch> &neg){posPatch = pos; negPatch = neg;}CTrainSet39,957
+    ~CTrainSet(){}~CTrainSet40,1062
+    int size()const{return posPatch.size() + negPatch.size();}size42,1082
+    std::vector<CPosPatch> posPatch;posPatch44,1146
+    std::vector<CNegPatch> negPatch;negPatch45,1183
+class CRTree CRTree48,1224
+    CRTree(int		min_s,	//min sampleCRTree52,1266
+    ~CRTree()~CRTree74,2049
+    unsigned int GetDepth() const {return max_depth;}GetDepth86,2372
+    unsigned int GetNumCenter() const {return num_cp;}GetNumCenter87,2426
+    double measureSet(const CTrainSet& SetA, const CTrainSet& SetB, unsigned int depth,int mode) {measureSet113,3897
+    int* treetable;treetable139,4698
+    unsigned int	min_samples;min_samples142,4787
+    unsigned int	max_depth;max_depth144,4855
+    unsigned int	num_nodes;num_nodes146,4925
+    unsigned int	num_leaf;num_leaf148,4976
+    unsigned int	num_cp;num_cp150,5044
+    LeafNode*	leaf;leaf152,5091
+    CConfig config;config154,5112
+    unsigned int depth;depth157,5159
+    static boost::lagged_fibonacci1279 genTree;genTree159,5184
+    int nclass;nclass160,5232
+    std::vector<int> defaultClass, containClass, containClassA, containClassB;defaultClass162,5249
+    std::vector<int> defaultClass, containClass, containClassA, containClassB;containClass162,5249
+    std::vector<int> defaultClass, containClass, containClassA, containClassB;containClassA162,5249
+    std::vector<int> defaultClass, containClass, containClassA, containClassB;containClassB162,5249
+    std::vector<std::vector<CPosPatch> > patchPerClass;patchPerClass164,5329
+    CClassDatabase classDatabase;classDatabase166,5386
+inline void CRTree::generateTest(int* test, unsigned int max_w, unsigned int max_h, unsigned int max_c, int depth) {generateTest172,5524
+
+source/CRForest.cpp,611
+paramHist& paramHist::operator +(const paramHist& obj){operator +5,87
+paramHist& paramHist::operator +=(const paramHist& obj){operator +=13,249
+void paramHist::showHist(){showHist21,412
+double euclideanDist(cv::Point p, cv::Point q)euclideanDist27,558
+void CRForest::learning(){learning33,690
+void CRForest::growATree(const int treeNum){growATree43,875
+void CRForest::loadForest(){loadForest220,6779
+CDetectionResult CRForest::detection(CTestDataset &testSet) const{detection239,7431
+void CRForest::regression(std::vector<const LeafNode*>& result, CTestPatch &patch) const{regression525,19763
+
+source/CRTree.cpp,1415
+void CRTree::calcHaarLikeFeature(const cv::Mat &patch, const int* test, double &p1, double &p2) const{calcHaarLikeFeature8,150
+const LeafNode* CRTree::regression(CTestPatch &patch) const {regression268,11599
+CRTree::CRTree(const char* filename, const char* databaseName,CConfig &conf):config(conf) {CRTree334,13565
+bool CRTree::saveTree(const char* filename) const {saveTree452,17458
+void CRTree::growTree(std::vector<CPosPatch> &posPatch, std::vector<CNegPatch> &negPatch, int node, int depth, float pnratio, CConfig conf, const std::vector<int> &defaultClass_){growTree524,19784
+void CRTree::makeLeaf(CTrainSet &trainSet, float pnratio, int node) {makeLeaf656,24740
+bool CRTree::optimizeTest(CTrainSet &SetA, CTrainSet &SetB, CTrainSet &trainSet, int* test, unsigned int iter, unsigned int measure_mode, int depth) {optimizeTest725,27373
+void CRTree::evaluateTest(std::vector<std::vector<IntIndex> >& valSet, const int* test, CTrainSet &trainSet) {evaluateTest980,37375
+void CRTree::split(CTrainSet& SetA, CTrainSet& SetB, const CTrainSet& trainSet, const vector<vector<IntIndex> >& valSet, int t) {split1128,43016
+double CRTree::distMean(const std::vector<CPosPatch>& SetA, const std::vector<CPosPatch>& SetB) {distMean1208,46198
+double CRTree::InfGain(const CTrainSet& SetA, const CTrainSet& SetB) {InfGain1312,51196
+double CRTree::calcEntropy(const CTrainSet &set)calcEntropy1393,54432
+
+source/CDetectionResult.h,720
+#define DETECTIONRESULT_HDETECTIONRESULT_H2,26
+class CDetectedClassCDetectedClass7,102
+    CDetectedClass(){CDetectedClass10,133
+    virtual ~CDetectedClass(){}~CDetectedClass14,222
+    std::string name;name16,255
+    cv::Rect bbox;bbox17,277
+    cv::Point centerPoint;centerPoint18,296
+    double error;error20,324
+    float score;score21,342
+    std::string nearestClass;nearestClass22,359
+    double angle[3];angle23,389
+class CDetectionResultCDetectionResult26,414
+    CDetectionResult(){CDetectionResult29,447
+    virtual ~CDetectionResult(){~CDetectionResult33,535
+    std::vector<cv::Mat> voteImage;voteImage36,575
+    std::vector<CDetectedClass> detectedClass;detectedClass38,612
+
+source/HoG.h,164
+class HoG {HoG12,158
+  int bins;bins23,554
+  float binsize; binsize24,567
+  int g_w;g_w26,590
+  CvMat* Gauss;Gauss28,622
+  float* ptGauss;ptGauss31,663
+
+source/CRForest.h,574
+#define __CRFOREST____CRFOREST__3,22
+class paramHist {paramHist18,251
+    paramHist(){paramHist20,277
+    ~paramHist(){~paramHist29,563
+    cv::Mat_<double> roll, pitch, yaw;roll36,679
+    cv::Mat_<double> roll, pitch, yaw;pitch36,679
+    cv::Mat_<double> roll, pitch, yaw;yaw36,679
+static HoG hog;hog40,743
+class CRForest {CRForest42,760
+    CRForest(CConfig config){CRForest44,785
+    ~CRForest() {~CRForest48,880
+    CClassDatabase classDatabase;classDatabase92,2436
+    CConfig		conf;conf95,2480
+    std::vector<CRTree*>	vTrees;vTrees96,2499
+
+source/CConfig.cpp,62
+int CConfig::loadConfig(const char* filename)loadConfig3,22
+
+source/globjloader.h,1736
+#define GLOBJLOADER_HGLOBJLOADER_H2,22
+#define bool bool23,354
+#define true true24,371
+#define false false25,386
+class CGlObjLoaderCGlObjLoader28,404
+    cv::Mat frontBuffer;frontBuffer38,627
+    cv::Mat depthBuffer;depthBuffer39,652
+    double roll, pitch, yaw;roll41,678
+    double roll, pitch, yaw;pitch41,678
+    double roll, pitch, yaw;yaw41,678
+    double _left = 0.0;		/* ortho view volume params */_left53,930
+    double _right = 0.0;_right54,986
+    double _bottom = 0.0;_bottom55,1011
+    double _top = 0.0;_top56,1037
+    double _zNear = 0.1;_zNear57,1060
+    double _zFar = 10.0;_zFar58,1085
+    double fovy = 45.0;fovy59,1110
+    double prev_z = 0;prev_z60,1134
+    double _matrix[16];		/* model matrix and supporting linear algebra functions */_matrix64,1186
+    double _matrixI[16];_matrixI65,1270
+    GLMmodel *pmodel = NULL;	/* the loaded model */pmodel73,1574
+    char filename[256];filename74,1626
+    GLuint mode = 0;		/* viewing mode */mode75,1650
+    int ww, wh;			/* window width and height */ww77,1692
+    int ww, wh;			/* window width and height */wh77,1692
+    GLfloat light_ambient[4] = { 0.0, 0.0, 0.0, 1.0 };light_ambient96,2204
+    GLfloat light_diffuse[4] = { 1.0, 1.0, 1.0, 1.0 };light_diffuse97,2259
+    GLfloat light_specular[4] = { 1.0, 1.0, 1.0, 1.0 };light_specular98,2314
+    GLfloat light_position[4] = { 1.0, 1.0, 1.0, 0.0 };light_position99,2370
+    GLfloat mat_ambient[4] = { 0.7, 0.7, 0.7, 1.0 };mat_ambient101,2427
+    GLfloat mat_diffuse[4] = { 0.8, 0.8, 0.8, 1.0 };mat_diffuse102,2480
+    GLfloat mat_specular[4] = { 1.0, 1.0, 1.0, 1.0 };mat_specular103,2533
+    GLfloat high_shininess[1] = { 100.0 };high_shininess104,2587
+
+source/CDataset.h,2583
+#define CDATASET_HCDATASET_H2,19
+class CParamset{CParamset15,185
+    CParamset(){}CParamset17,210
+    ~CParamset(){}~CParamset18,228
+    int setCenterPoint(cv::Point cp){centerPoint = cp;return 0;}setCenterPoint20,248
+    cv::Point getCenterPoint()const{return centerPoint;}getCenterPoint21,313
+    int setClassName(std::string name){className = name;return 0;}setClassName23,371
+    std::string getClassName()const{return className;}getClassName24,438
+    int setAngle(double* an){setAngle26,494
+    double* getAngle(){return angle;}getAngle31,612
+    cv::Point centerPoint;centerPoint43,892
+    std::string className;className44,919
+    double angle[3];angle45,946
+    cv::Rect boundingbox;boundingbox47,968
+class CDataset {CDataset52,1070
+    void setRgbImagePath(std::string rgb_path){rgb = rgb_path;}setRgbImagePath64,1361
+    void setDepthImagePath(std::string depth_path){depth = depth_path;}setDepthImagePath65,1425
+    std::string getRgbImagePath(){return rgb;}getRgbImagePath68,1499
+    std::string getDepthImagePath(){return depth;}getDepthImagePath69,1546
+    void setModelPath(std::string p){model = p;}setModelPath71,1598
+    std::string getModelPath(){return model;}getModelPath72,1647
+    std::vector<cv::Mat*> img, feature;img75,1728
+    std::vector<cv::Mat*> img, feature;feature75,1728
+    bool imgFlag, featureFlag;imgFlag81,1854
+    bool imgFlag, featureFlag;featureFlag81,1854
+    std::string rgb, depth, mask;rgb84,1909
+    std::string rgb, depth, mask;depth84,1909
+    std::string rgb, depth, mask;mask84,1909
+    std::string model;model85,1943
+    HoG hog;hog98,2288
+class CPosDataset : public CDataset{CPosDataset101,2305
+    CPosDataset(){}CPosDataset103,2350
+    virtual ~CPosDataset(){}~CPosDataset104,2370
+    void setClassName(std::string name){param.setClassName(name);}setClassName106,2400
+    void setAngle(double* an){param.setAngle(an);}setAngle107,2467
+    void setCenterPoint(cv::Point cp){param.setCenterPoint(cp);}setCenterPoint108,2518
+    std::string getClassName(){return param.getClassName();}getClassName110,2584
+    CParamset* getParam(){return &param;}getParam112,2646
+    CParamset param;param115,2698
+class CNegDataset : public CDataset{CNegDataset118,2723
+    CNegDataset(){}CNegDataset120,2768
+    virtual ~CNegDataset(){}~CNegDataset121,2788
+class CTestDataset : public CDataset{CTestDataset125,2822
+    CTestDataset(){}CTestDataset127,2868
+    virtual ~CTestDataset(){}~CTestDataset128,2889
+    std::vector<CParamset> param;param130,2920
+
+source/ctlkinect.cpp,665
+#define CONFIG_PATH CONFIG_PATH4,46
+float* g_pDepthHist;g_pDepthHist8,108
+XnRGB24Pixel* g_pTexMap = NULL;g_pTexMap9,129
+unsigned int g_nTexMapX = 0;g_nTexMapX10,161
+unsigned int g_nTexMapY = 0;g_nTexMapY11,190
+XnDepthPixel g_nZRes;g_nZRes12,219
+Context g_context;g_context16,295
+ScriptNode g_scriptNode;g_scriptNode17,314
+DepthGenerator g_depth;g_depth18,339
+ImageGenerator g_image;g_image19,363
+DepthMetaData g_depthMD;g_depthMD20,387
+ImageMetaData g_imageMD;g_imageMD21,412
+CtlKinect::CtlKinect()CtlKinect23,438
+CtlKinect::~CtlKinect(){~CtlKinect113,3433
+void CtlKinect::getRGBDData(cv::Mat* rgb, cv::Mat* depth){getRGBDData118,3507
+
+source/HoG.cpp,280
+HoG::HoG() {HoG12,172
+void HoG::extractOBin(const cv::Mat* Iorient,const cv::Mat* Imagn, std::vector<cv::Mat*>& out, int off) {extractOBin38,881
+void HoG::calcHoGBin(const cv::Mat* IOri, const cv::Mat* IMag, std::vector<cv::Mat*>& out, int offX, int offY){calcHoGBin68,1866
+
+source/globjloader.cpp,1620
+CGlObjLoader::CGlObjLoader(char* fname)CGlObjLoader3,26
+CGlObjLoader::~CGlObjLoader(){~CGlObjLoader60,1633
+void CGlObjLoader::Reshape(int w, int h){Reshape65,1691
+double CGlObjLoader::vlen(double x, double y, double z)vlen84,2135
+void CGlObjLoader::pos(double *px, double *py, double *pz, const int x, const int y,pos89,2236
+void CGlObjLoader::getMatrix()getMatrix106,2735
+void CGlObjLoader::invertMatrix(const GLdouble * m, GLdouble * out)invertMatrix112,2856
+#define MAT(MAT116,2975
+#define m11 m11119,3085
+#define m12 m12120,3108
+#define m13 m13121,3131
+#define m14 m14122,3154
+#define m21 m21123,3177
+#define m22 m22124,3200
+#define m23 m23125,3223
+#define m24 m24126,3246
+#define m31 m31127,3269
+#define m32 m32128,3292
+#define m33 m33129,3315
+#define m34 m34130,3338
+#define m41 m41131,3361
+#define m42 m42132,3384
+#define m43 m43133,3407
+#define m44 m44134,3430
+#undef m11m11197,5821
+#undef m12m12198,5832
+#undef m13m13199,5843
+#undef m14m14200,5854
+#undef m21m21201,5865
+#undef m22m22202,5876
+#undef m23m23203,5887
+#undef m24m24204,5898
+#undef m31m31205,5909
+#undef m32m32206,5920
+#undef m33m33207,5931
+#undef m34m34208,5942
+#undef m41m41209,5953
+#undef m42m42210,5964
+#undef m43m43211,5975
+#undef m44m44212,5986
+#undef MATMAT213,5997
+void CGlObjLoader::DrawModel(void)DrawModel216,6011
+void CGlObjLoader::Display(void)Display243,6504
+cv::vector<cv::Mat*> CGlObjLoader::getAppearance(double r, double p, double y){getAppearance334,8885
+cv::vector<cv::Mat*> CGlObjLoader::getAppearance(double* angle){getAppearance352,9271
+
+source/CConfig.h,2673
+#define __CCONFIG____CCONFIG__2,20
+class CConfigCConfig18,336
+    CConfig(){CConfig21,360
+    ~CConfig(){};~CConfig24,404
+    double widthScale,heightScale;widthScale26,423
+    double widthScale,heightScale;heightScale26,423
+    std::string	treepath;treepath31,523
+    int		ntrees;ntrees33,572
+    int		p_width;p_width35,608
+    int		p_height;p_height37,646
+    std::string	impath;impath39,687
+    std::string	imfiles;imfiles41,744
+    bool		xtrFeature;xtrFeature43,793
+    std::vector<float>	scales;scales45,829
+    std::vector<float>	ratios;ratios47,873
+    std::string	outpath;outpath49,923
+    int		out_scale;out_scale51,1000
+    std::string	trainpath;trainpath53,1082
+    std::string	traindatafile;traindatafile55,1140
+    std::string	trainpospath;trainpospath57,1204
+    std::string	trainposfiles;trainposfiles59,1268
+    int		subsamples_pos;subsamples_pos61,1347
+    unsigned int	samples_pos;samples_pos63,1413
+    std::string	trainnegpath;trainnegpath65,1476
+    std::string	trainnegfiles;trainnegfiles67,1540
+    int		subsamples_neg;subsamples_neg69,1614
+    unsigned int	samples_neg;samples_neg71,1673
+    int	off_tree;off_tree73,1740
+    int	imagePerTree;imagePerTree75,1786
+    int	min_sample;min_sample77,1838
+    int	max_depth;max_depth79,1883
+    int	featureChannel;featureChannel81,1932
+    double	patchRatio;patchRatio83,1983
+    int stride;stride85,2037
+    std::string testPath;testPath87,2075
+    std::string testData;testData89,2123
+    int testMode;testMode91,2166
+    double detectThreshold;detectThreshold92,2184
+    std::string negDataPath,negDataList;negDataPath94,2213
+    std::string negDataPath,negDataList;negDataList94,2213
+    int showGT;showGT96,2255
+    std::string classDatabaseName;classDatabaseName98,2272
+    int learningMode;learningMode100,2308
+    std::string traindatalist;traindatalist102,2331
+    std::string testdatalist;testdatalist103,2362
+    int negMode;negMode104,2392
+    double pnRatio;pnRatio106,2410
+    double acPatchRatio;acPatchRatio108,2431
+    double mindist;mindist109,2456
+    double maxdist;maxdist110,2476
+    int nOfTrials;nOfTrials112,2497
+    int crossVMode;crossVMode114,2517
+    std::string negFolderList;negFolderList116,2538
+    int demoMode;demoMode117,2569
+    int clusterNumLimit;clusterNumLimit118,2587
+    int rgbFeature;rgbFeature121,2666
+    int depthFeature;depthFeature122,2686
+    int paramRadius;paramRadius124,2709
+    std::string modelListFolder;modelListFolder126,2731
+    std::string modelListName;modelListName127,2764
+    boost::property_tree::ptree pt;pt130,2805
+
+source/ctlkinect.h,424
+#define CTLKINECT_HCTLKINECT_H2,20
+#define CV_WIDTH CV_WIDTH19,266
+#define CV_HEIGHT CV_HEIGHT20,287
+class CtlKinect// : public QObjectCtlKinect23,311
+    xn::Context g_context;g_context37,556
+    XnStatus rc;rc40,619
+    xn::ImageGenerator g_image;g_image45,753
+    xn::DepthGenerator g_depth;g_depth46,785
+    xn::ImageMetaData g_imageMD;g_imageMD49,915
+    xn::DepthMetaData g_depthMD;g_depthMD50,948
+
+source/util.h,651
+#define __UTIL____UTIL__2,17
+#define PATH_SEP PATH_SEP4,35
+class databaseNode{databaseNode32,718
+    databaseNode(std::string className,cv::Size size, uchar depth)databaseNode34,746
+    std::string name;name37,891
+    cv::Size classSize;classSize38,913
+    uchar classDepth;classDepth39,937
+    int instances;instances41,960
+class CClassDatabase{CClassDatabase44,983
+    CClassDatabase(){CClassDatabase46,1013
+    void clear(){clear58,1254
+    std::vector<databaseNode> vNode;vNode62,1303
+class nCk{nCk65,1344
+    std::set<int> generate(int n, int k){generate67,1363
+    static boost::lagged_fibonacci1279 gen;gen86,1894
+
+source/CPatch.h,2672
+#define __CPATCH____CPATCH__2,19
+class CPatchCPatch7,82
+    CPatch(CDataset *d, cv::Rect r) : data(d), roi(r){CPatch10,105
+    CPatch(){}CPatch14,297
+    virtual ~CPatch(){}~CPatch15,312
+    void setData(CDataset *d){data = d;}setData17,337
+    CDataset* getData()const{return data;}getData18,378
+    void setRoi(cv::Rect r){roi = r;}setRoi20,422
+    cv::Rect getRoi()const{return roi;}getRoi21,460
+    cv::Mat* getFeature(int featureNum) const{return data->feature.at(featureNum);}getFeature23,501
+    cv::Mat* getDepth() const{return data->img.at(1);}getDepth24,585
+    cv::Rect roi;roi28,717
+    double scale;scale29,735
+    CDataset *data;data30,753
+class CPosPatch : public CPatch{CPosPatch34,778
+    CPosPatch(CPosDataset *pos, cv::Rect r) : pData(pos), CPatch(pos, r){CPosPatch36,819
+    CPosPatch(){CPosPatch40,1102
+    virtual ~CPosPatch(){}~CPosPatch43,1126
+    std::string getClassName()const{return pData->getParam()->getClassName();}getClassName45,1154
+    cv::Point getCenterPoint()const{return pData->getParam()->getCenterPoint();}getCenterPoint46,1233
+    int getFeatureNum()const{return pData->feature.size();}getFeatureNum47,1314
+    CParamset getParam()const{return *(pData->getParam());}getParam48,1374
+    std::string getRgbImageFilePath(){return pData->getRgbImagePath();}getRgbImageFilePath49,1434
+    cv::Mat* getDepth() const{return pData->img.at(1);}getDepth50,1506
+    void setCenterPoint(cv::Point nCenter){pData->setCenterPoint(nCenter);}setCenterPoint51,1562
+    cv::Point getRelativePosition(){return relativePosition;}getRelativePosition53,1639
+    void setRelativePosition(const cv::Point p){relativePosition = p;}setRelativePosition54,1701
+    CPosDataset *pData;pData57,1782
+    cv::Point relativePosition;relativePosition58,1806
+class CNegPatch : public CPatch{CNegPatch61,1842
+    CNegPatch(CNegDataset *neg, cv::Rect r) : nData(neg), CPatch(neg, r){}CNegPatch63,1883
+    CNegPatch(){}CNegPatch64,1958
+    int getFeatureNum()const{return nData->feature.size();}getFeatureNum65,1976
+    cv::Mat* getDepth() const{return nData->img.at(1);}getDepth66,2036
+    virtual ~CNegPatch(){}~CNegPatch67,2092
+    CNegDataset *nData;nData70,2129
+class CTestPatch : public CPatch{CTestPatch73,2157
+    CTestPatch(CTestDataset *tes, cv::Rect r) : tData(tes), CPatch(tes, r){}CTestPatch75,2199
+    CTestPatch(){}CTestPatch76,2276
+    virtual ~CTestPatch(){}~CTestPatch77,2295
+    int getFeatureNum()const {return tData->feature.size();}getFeatureNum79,2373
+    cv::Mat* getDepth() const{return tData->img.at(1);}getDepth80,2434
+    CTestDataset *tData;tData83,2500
+
+source/objectPoseEstimation.cpp,225
+void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){loadTestFileMultiObject10,143
+void detect(const CRForest &forest, CConfig conf){detect95,3120
+int main(int argc, char* argv[]){main133,4278
+
+source/CDataset.cpp,1054
+CParamset& CParamset::operator+=(const CParamset& obj){operator +=3,23
+CParamset& CParamset::operator/=(const float& div){operator /=13,325
+std::string CParamset::outputParam(){outputParam23,647
+void cropImageAndDepth(cv::Mat* rgb, cv::Mat* depth, double mindist, double maxdist){cropImageAndDepth44,1266
+CDataset::CDataset()CDataset81,2488
+CDataset::~CDataset(){~CDataset89,2590
+int CDataset::loadImage(const CConfig &conf){loadImage101,2830
+int CDataset::loadImage(const CConfig &conf, const std::string modelName, const CParamset* param){loadImage142,3888
+int CDataset::releaseImage(){releaseImage174,4831
+int CParamset::showParam(){showParam189,5091
+int CDataset::extractFeatures(const CConfig& conf){extractFeatures201,5426
+int CDataset::releaseFeatures(){releaseFeatures308,9535
+void CDataset::minFilter(cv::Mat* src, cv::Mat* des, int fWind) {minFilter326,9897
+void CDataset::maxFilter(cv::Mat* src, cv::Mat* des, int fWind) {maxFilter358,10952
+CNegDataset convertPosToNeg2(CPosDataset &pos)convertPosToNeg2391,12004
+
+source/util.cpp,1470
+boost::lagged_fibonacci1279 nCk::gen = boost::lagged_fibonacci1279();gen3,19
+boost::lagged_fibonacci1279 genPose = boost::lagged_fibonacci1279();genPose4,89
+float calcSumOfDepth(cv::Mat &depth, const CConfig &conf){calcSumOfDepth6,159
+void loadTrainObjFile(CConfig conf, std::vector<CPosDataset> &posSet)loadTrainObjFile21,725
+void loadTrainPosFile(CConfig conf, std::vector<CPosDataset> &posSet)loadTrainPosFile73,2280
+void loadTrainNegFile(CConfig conf, std::vector<CNegDataset> &negSet)loadTrainNegFile195,6172
+void extractPosPatches(std::vector<CPosDataset> &posSet,extractPosPatches249,7821
+void extractNegPatches(std::vector<CNegDataset> &negSet,extractNegPatches383,12889
+void extractTestPatches(CTestDataset &testSet,std::vector<CTestPatch> &testPatch, CConfig conf){extractTestPatches469,16118
+void pBar(int p,int maxNum, int width){pBar534,18583
+void CClassDatabase::add(std::string str, cv::Size size, uchar depth){add546,18939
+void CClassDatabase::write(const char* str){write557,19229
+void CClassDatabase::read(const char* str){read576,19733
+void CClassDatabase::show() const{show610,20419
+int CClassDatabase::search(std::string str) const{search621,20745
+void normarizationByDepth(CPatch &patch, const CConfig &config){//, const CConfig &config)const {normarizationByDepth629,20988
+void normarizationCenterPointP(CPosPatch &patch, const CConfig &config){//, const CConfig &config)const {normarizationCenterPointP697,23940
+
+source/learning.cpp,44
+int main(int argc, char* argv[]){main6,63
+
+distribute_setup.py,2163
+    USER_SITE = NoneUSER_SITE30,739
+    def _python_cmd(*args):_python_cmd35,789
+    def _python_cmd(*args):_python_cmd41,954
+            def quote(arg):quote45,1097
+DEFAULT_VERSION = "0.6.45"DEFAULT_VERSION52,1336
+DEFAULT_URL = "http://pypi.python.org/packages/source/d/distribute/"DEFAULT_URL53,1363
+SETUPTOOLS_FAKED_VERSION = "0.6c11"SETUPTOOLS_FAKED_VERSION54,1432
+def _install(tarball, install_args=()):_install69,1669
+def _build_egg(egg, tarball, to_dir):_build_egg97,2494
+def _do_download(version, download_base, to_dir, download_delay):_do_download126,3298
+def use_setuptools(version=DEFAULT_VERSION, download_base=DEFAULT_URL,use_setuptools138,3794
+def download_setuptools(version=DEFAULT_VERSION, download_base=DEFAULT_URL,download_setuptools188,5861
+def _no_sandbox(function):_no_sandbox225,7249
+    def __no_sandbox(*args, **kw):__no_sandbox226,7276
+                def violation(*args):violation230,7438
+def _patch_file(path, content):_patch_file250,7995
+_patch_file = _no_sandbox(_patch_file)_patch_file268,8414
+def _same_content(path, content):_same_content271,8455
+def _rename_path(path):_rename_path278,8595
+def _remove_flat_installation(placeholder):_remove_flat_installation285,8767
+_remove_flat_installation = _no_sandbox(_remove_flat_installation)_remove_flat_installation318,9901
+def _after_install(dist):_after_install321,9970
+def _create_fake_setuptools_pkg_info(placeholder):_create_fake_setuptools_pkg_info327,10155
+_create_fake_setuptools_pkg_info = _no_sandbox(_create_fake_setuptools_pkg_info358,11158
+def _patch_egg_dir(path):_patch_egg_dir363,11247
+_patch_egg_dir = _no_sandbox(_patch_egg_dir)_patch_egg_dir381,11809
+def _before_install():_before_install384,11856
+def _under_prefix(location):_under_prefix389,11946
+def _fake_setuptools():_fake_setuptools407,12608
+def _relaunch():_relaunch462,14468
+def _extractall(self, path=".", members=None):_extractall474,14871
+        def sorter(dir1, dir2):sorter499,15732
+def _build_install_args(options):_build_install_args521,16423
+def _parse_args():_parse_args533,16796
+def main(version=DEFAULT_VERSION):main549,17374
+
+CMakeFiles/2.8.10.1/CompilerIdCXX/CMakeCXXCompilerId.cpp,6840
+# define COMPILER_ID COMPILER_ID12,389
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR14,450
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR15,510
+# define COMPILER_ID COMPILER_ID18,621
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR20,681
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR21,739
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH22,801
+#  define COMPILER_VERSION_TWEAK COMPILER_VERSION_TWEAK25,952
+# define COMPILER_ID COMPILER_ID29,1053
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR30,1086
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR31,1134
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH33,1224
+# define COMPILER_ID COMPILER_ID37,1318
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR38,1347
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR39,1400
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH40,1453
+# define COMPILER_ID COMPILER_ID43,1574
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR44,1609
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR45,1681
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH46,1753
+# define COMPILER_ID COMPILER_ID49,1854
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR51,1914
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR52,1967
+# define COMPILER_ID COMPILER_ID55,2052
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR57,2109
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR58,2164
+# define COMPILER_ID COMPILER_ID61,2247
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR64,2334
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR65,2388
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH66,2448
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR69,2543
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR70,2596
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH71,2655
+# define COMPILER_ID COMPILER_ID75,2747
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR77,2799
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR78,2851
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH79,2907
+# define COMPILER_ID COMPILER_ID82,2988
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR84,3051
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR85,3110
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH86,3174
+#  define COMPILER_ID COMPILER_ID90,3298
+#   define COMPILER_ID COMPILER_ID93,3357
+#   define COMPILER_ID COMPILER_ID95,3393
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR98,3463
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR99,3516
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH100,3573
+# define COMPILER_ID COMPILER_ID104,3660
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR105,3687
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR106,3733
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH108,3819
+# define COMPILER_ID COMPILER_ID112,3908
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR113,3936
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR114,3982
+# define COMPILER_ID COMPILER_ID117,4074
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR119,4148
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR120,4217
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH121,4292
+# define COMPILER_ID COMPILER_ID124,4399
+# define COMPILER_ID COMPILER_ID127,4451
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR128,4478
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR129,4524
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH131,4610
+# define COMPILER_ID COMPILER_ID135,4701
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR137,4753
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR138,4805
+#   define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH142,4944
+#   define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH145,5049
+#  define COMPILER_VERSION_TWEAK COMPILER_VERSION_TWEAK149,5152
+# define COMPILER_ID COMPILER_ID154,5280
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR156,5350
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR157,5412
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH158,5481
+# define COMPILER_ID COMPILER_ID162,5665
+# define COMPILER_ID COMPILER_ID165,5761
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR168,5864
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR169,5928
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH170,5996
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR173,6103
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR174,6163
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH175,6227
+# define COMPILER_ID COMPILER_ID182,6489
+# define COMPILER_ID COMPILER_ID185,6562
+# define COMPILER_ID COMPILER_ID188,6618
+char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";info_compiler196,6917
+# define PLATFORM_ID PLATFORM_ID200,7088
+# define PLATFORM_ID PLATFORM_ID203,7144
+# define PLATFORM_ID PLATFORM_ID206,7202
+# define PLATFORM_ID PLATFORM_ID209,7257
+# define PLATFORM_ID PLATFORM_ID212,7350
+# define PLATFORM_ID PLATFORM_ID215,7431
+# define PLATFORM_ID PLATFORM_ID218,7510
+# define PLATFORM_ID PLATFORM_ID221,7590
+# define PLATFORM_ID PLATFORM_ID224,7659
+# define PLATFORM_ID PLATFORM_ID227,7785
+# define PLATFORM_ID PLATFORM_ID230,7871
+# define PLATFORM_ID PLATFORM_ID233,7943
+# define PLATFORM_ID PLATFORM_ID236,8037
+# define PLATFORM_ID PLATFORM_ID242,8215
+# define PLATFORM_ID PLATFORM_ID245,8290
+# define PLATFORM_ID PLATFORM_ID248,8382
+# define PLATFORM_ID PLATFORM_ID251,8459
+# define PLATFORM_ID PLATFORM_ID254,8557
+# define PLATFORM_ID PLATFORM_ID257,8614
+# define PLATFORM_ID PLATFORM_ID260,8671
+# define PLATFORM_ID PLATFORM_ID263,8741
+# define PLATFORM_ID PLATFORM_ID266,8813
+# define PLATFORM_ID PLATFORM_ID269,8903
+# define PLATFORM_ID PLATFORM_ID272,9001
+# define PLATFORM_ID PLATFORM_ID275,9094
+# define PLATFORM_ID PLATFORM_ID278,9153
+#  define ARCHITECTURE_ID ARCHITECTURE_ID289,9496
+#  define ARCHITECTURE_ID ARCHITECTURE_ID292,9574
+#  define ARCHITECTURE_ID ARCHITECTURE_ID295,9631
+#  define ARCHITECTURE_ID ARCHITECTURE_ID298,9687
+#  define ARCHITECTURE_ID ARCHITECTURE_ID301,9744
+#  define ARCHITECTURE_ID ARCHITECTURE_ID304,9800
+#  define ARCHITECTURE_ID ARCHITECTURE_ID307,9867
+#  define ARCHITECTURE_ID ARCHITECTURE_ID311,9911
+#define DEC(DEC315,9998
+#define HEX(HEX326,10347
+char const info_version[] = {info_version338,10709
+char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";info_platform358,11369
+char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";info_arch359,11437
+int main(int argc, char* argv[])main365,11584
+
+CMakeFiles/2.8.10.1/CompilerIdC/CMakeCCompilerId.c,7024
+# define ID_VOID_MAINID_VOID_MAIN9,224
+# define COMPILER_ID COMPILER_ID13,302
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR15,362
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR16,420
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH17,482
+#  define COMPILER_VERSION_TWEAK COMPILER_VERSION_TWEAK20,633
+# define COMPILER_ID COMPILER_ID24,734
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR25,767
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR26,815
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH28,905
+# define COMPILER_ID COMPILER_ID32,999
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR33,1028
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR34,1081
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH35,1134
+# define COMPILER_ID COMPILER_ID38,1255
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR39,1290
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR40,1362
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH41,1434
+# define COMPILER_ID COMPILER_ID44,1535
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR46,1595
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR47,1648
+# define COMPILER_ID COMPILER_ID50,1733
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR52,1790
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR53,1845
+# define COMPILER_ID COMPILER_ID56,1927
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR59,2012
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR60,2065
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH61,2124
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR64,2217
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR65,2269
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH66,2327
+# define COMPILER_ID COMPILER_ID70,2417
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR72,2468
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR73,2519
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH74,2574
+# define COMPILER_ID COMPILER_ID77,2652
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR79,2713
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR80,2770
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH81,2832
+#  define COMPILER_ID COMPILER_ID85,2952
+#   define COMPILER_ID COMPILER_ID88,3009
+#   define COMPILER_ID COMPILER_ID90,3045
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR93,3113
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR94,3164
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH95,3219
+# define COMPILER_ID COMPILER_ID99,3304
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR100,3331
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR101,3377
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH103,3463
+# define COMPILER_ID COMPILER_ID107,3552
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR108,3580
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR109,3626
+# define COMPILER_ID COMPILER_ID112,3718
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR114,3792
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR115,3861
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH116,3936
+# define COMPILER_ID COMPILER_ID119,4037
+# define COMPILER_ID COMPILER_ID122,4099
+# define COMPILER_ID COMPILER_ID125,4151
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR126,4178
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR127,4224
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH129,4310
+# define COMPILER_ID COMPILER_ID133,4401
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR135,4453
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR136,4505
+#   define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH140,4644
+#   define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH143,4749
+#  define COMPILER_VERSION_TWEAK COMPILER_VERSION_TWEAK147,4852
+# define COMPILER_ID COMPILER_ID152,4980
+# define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR154,5050
+# define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR155,5112
+# define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH156,5181
+# define COMPILER_ID COMPILER_ID160,5365
+# define COMPILER_ID COMPILER_ID171,5673
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR173,5720
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR174,5767
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH175,5818
+# define COMPILER_ID COMPILER_ID178,5937
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR181,6040
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR182,6104
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH183,6172
+#  define COMPILER_VERSION_MAJOR COMPILER_VERSION_MAJOR186,6279
+#  define COMPILER_VERSION_MINOR COMPILER_VERSION_MINOR187,6339
+#  define COMPILER_VERSION_PATCH COMPILER_VERSION_PATCH188,6403
+# define COMPILER_ID COMPILER_ID195,6665
+# define COMPILER_ID COMPILER_ID198,6738
+# define COMPILER_ID COMPILER_ID201,6794
+char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";info_compiler209,7093
+# define PLATFORM_ID PLATFORM_ID213,7264
+# define PLATFORM_ID PLATFORM_ID216,7320
+# define PLATFORM_ID PLATFORM_ID219,7378
+# define PLATFORM_ID PLATFORM_ID222,7433
+# define PLATFORM_ID PLATFORM_ID225,7526
+# define PLATFORM_ID PLATFORM_ID228,7607
+# define PLATFORM_ID PLATFORM_ID231,7686
+# define PLATFORM_ID PLATFORM_ID234,7766
+# define PLATFORM_ID PLATFORM_ID237,7835
+# define PLATFORM_ID PLATFORM_ID240,7961
+# define PLATFORM_ID PLATFORM_ID243,8047
+# define PLATFORM_ID PLATFORM_ID246,8119
+# define PLATFORM_ID PLATFORM_ID249,8213
+# define PLATFORM_ID PLATFORM_ID255,8391
+# define PLATFORM_ID PLATFORM_ID258,8466
+# define PLATFORM_ID PLATFORM_ID261,8558
+# define PLATFORM_ID PLATFORM_ID264,8635
+# define PLATFORM_ID PLATFORM_ID267,8733
+# define PLATFORM_ID PLATFORM_ID270,8790
+# define PLATFORM_ID PLATFORM_ID273,8847
+# define PLATFORM_ID PLATFORM_ID276,8917
+# define PLATFORM_ID PLATFORM_ID279,8989
+# define PLATFORM_ID PLATFORM_ID282,9079
+# define PLATFORM_ID PLATFORM_ID285,9177
+# define PLATFORM_ID PLATFORM_ID288,9270
+# define PLATFORM_ID PLATFORM_ID291,9329
+#  define ARCHITECTURE_ID ARCHITECTURE_ID302,9672
+#  define ARCHITECTURE_ID ARCHITECTURE_ID305,9750
+#  define ARCHITECTURE_ID ARCHITECTURE_ID308,9807
+#  define ARCHITECTURE_ID ARCHITECTURE_ID311,9863
+#  define ARCHITECTURE_ID ARCHITECTURE_ID314,9920
+#  define ARCHITECTURE_ID ARCHITECTURE_ID317,9976
+#  define ARCHITECTURE_ID ARCHITECTURE_ID320,10043
+#  define ARCHITECTURE_ID ARCHITECTURE_ID324,10087
+#define DEC(DEC328,10174
+#define HEX(HEX339,10523
+char const info_version[] = {info_version351,10885
+char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";info_platform371,11545
+char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";info_arch372,11613
+void main() {}main379,11780
+int main(int argc, char* argv[])main381,11801

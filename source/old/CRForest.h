@@ -1,5 +1,4 @@
 #ifndef __CRFOREST__
-
 #define __CRFOREST__
 
 #include "CRTree.h"

@@ -3,7 +3,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 #SET(CMAKE_CXX_COMPILER "clang++")
 
-
 # リリースビルド用オプション
 SET(CMAKE_CXX_FLAGS_RELEASE "-Wall -O3 -pg -fpermissive")
 SET(CMAKE_C_FLAGS_RELEASE "-fpermissive")
@@ -53,15 +52,15 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 # ライブラリの場所
 LINK_DIRECTORIES("/usr/local/lib")
 
-SET(RANDOM_FOREST source/CRForest.cpp source/util.cpp source/CRTree.cpp source/HoG.cpp source/CDataset.cpp source/CConfig.cpp source/globjloader.cpp)
+#SET(RANDOM_FOREST source/CRForest.cpp source/util.cpp source/CRTree.cpp source/HoG.cpp source/CDataset.cpp source/CConfig.cpp source/globjloader.cpp)
 
 # 実行ファイルを生成
-ADD_EXECUTABLE(objectPoseEstimation source/objectPoseEstimation.cpp ${RANDOM_FOREST})
-ADD_EXECUTABLE(learning source/learning.cpp ${RANDOM_FOREST})
+ADD_EXECUTABLE(objectPoseEstimation source/objectPoseEstimation.cpp)# ${RANDOM_FOREST})
+ADD_EXECUTABLE(learning source/learning.cpp)# ${RANDOM_FOREST})
 
 # ライブラリとリンクする
-TARGET_LINK_LIBRARIES(objectPoseEstimation ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU glm png jpeg)
-TARGET_LINK_LIBRARIES(learning ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU glm png jpeg)
+TARGET_LINK_LIBRARIES(objectPoseEstimation HFMD_core glm ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU png jpeg)
+TARGET_LINK_LIBRARIES(learning HFMD_core glm ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU png jpeg)#${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU glm png jpeg HFMD_core)
 # バージョン番号の適用
 # SET_TARGET_PROPERTIES(objectPoseEstimation PROPERTIES VERSION ${serial})
 # SET_TARGET_PROPERTIES(learning PROPERTIES VERSION ${serial})

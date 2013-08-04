@@ -1,9 +1,9 @@
-#include "CRForest.h"
+#include <HFMD_core/CRForest.h>
 #include <opencv2/opencv.hpp>
 #include <boost/timer.hpp>
 //#include "CRTree.h"
 
-#include "util.h"
+//#include "util.h"
 
 using namespace std;
 

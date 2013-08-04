@@ -1,5 +1,7 @@
-#include "CRForest.h"
-#include "util.h"
+#pragma GCC diagnostic ignored "-fpermissive"
+
+#include <HFMD_core/CRForest.h>
+//#include "util.h"
 
 using namespace std;
 

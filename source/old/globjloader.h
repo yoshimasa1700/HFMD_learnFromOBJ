@@ -28,7 +28,7 @@
 class CGlObjLoader
 {
 public:
-    CGlObjLoader(char* fname);
+  CGlObjLoader(char* fname);
     virtual ~CGlObjLoader();
 
     cv::vector<cv::Mat*> getAppearance(double r, double p, double y);
