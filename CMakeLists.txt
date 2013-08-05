@@ -59,8 +59,8 @@ ADD_EXECUTABLE(objectPoseEstimation source/objectPoseEstimation.cpp)# ${RANDOM_F
 ADD_EXECUTABLE(learning source/learning.cpp)# ${RANDOM_FOREST})
 
 # ライブラリとリンクする
-TARGET_LINK_LIBRARIES(objectPoseEstimation HFMD_core glm ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU png jpeg)
-TARGET_LINK_LIBRARIES(learning HFMD_core glm ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU png jpeg)#${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU glm png jpeg HFMD_core)
+TARGET_LINK_LIBRARIES(objectPoseEstimation HFMD_core glm ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} png jpeg)
+TARGET_LINK_LIBRARIES(learning HFMD_core glm ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} png jpeg)#${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} glm png jpeg HFMD_core)
 # バージョン番号の適用
 # SET_TARGET_PROPERTIES(objectPoseEstimation PROPERTIES VERSION ${serial})
 # SET_TARGET_PROPERTIES(learning PROPERTIES VERSION ${serial})
