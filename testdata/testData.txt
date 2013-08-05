@@ -1,3 +1,8 @@
+3
+../dataset/ornament/ornament_1
+../dataset/ornament/ornament_2
+../dataset/ornament/ornament_3
+
 14
 ../dataset/bottle/bottle_1
 ../dataset/bottle/bottle_2

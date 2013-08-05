@@ -1,3 +1,3 @@
 1
-clock/clock3.obj clock
 ornament/test3.obj ornament_3
+clock/clock3.obj clock
