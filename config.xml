@@ -51,7 +51,7 @@ n<pheight>20</pheight>
 <testmode>1</testmode>
 <detectthreshold>3.0</detectthreshold>
 <traindatalistname>dataListInst2.0.txt</traindatalistname>
-<testdatalistname>testDataListInst2.0.txt</testdatalistname>
+<testdatalistname>testDataList.txt</testdatalistname>
 <showgrandtruth>1</showgrandtruth>
 <negativedatapath>negdata</negativedatapath>
 <negativedatafolderlist>negDataFolderList.txt</negativedatafolderlist>

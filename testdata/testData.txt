@@ -1,4 +1,10 @@
 3
+./testData3
+../dataset/pack/pack_1
+../dataset/pack/pack_2
+
+
+3
 ../dataset/ornament/ornament_1
 ../dataset/ornament/ornament_2
 ../dataset/ornament/ornament_3
