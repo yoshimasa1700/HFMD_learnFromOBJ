@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- Path to trees -->
   <treepath>trees/treetable</treepath>
@@ -39,7 +40,7 @@ n<pheight>20</pheight>
 <!-- extract patch ratio-->
 <patchratio>1000</patchratio>
 <!-- Stride -->
-<stride>5</stride>
+<stride>30</stride>
 <!-- Offset of tree-->
 <offTree>0</offTree>
 <!-- test data path -->
