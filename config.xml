@@ -38,7 +38,7 @@ n<pheight>20</pheight>
 <!-- feature channel number-->
 <featurechannel>2</featurechannel>
 <!-- extract patch ratio-->
-<patchratio>1000</patchratio>
+<patchratio>500</patchratio>
 <!-- Stride -->
 <stride>30</stride>
 <!-- Offset of tree-->
