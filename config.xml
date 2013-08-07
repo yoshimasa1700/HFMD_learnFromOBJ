@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- Path to trees -->
   <treepath>trees/treetable</treepath>
@@ -34,11 +33,11 @@ n<pheight>20</pheight>
 <!-- min sample number-->
 <minsample>5</minsample>
 <!-- max depth of tree-->
-<maxdepth>10</maxdepth>
+<maxdepth>15</maxdepth>
 <!-- feature channel number-->
 <featurechannel>2</featurechannel>
 <!-- extract patch ratio-->
-<patchratio>1000</patchratio>
+<patchratio>2000</patchratio>
 <!-- Stride -->
 <stride>10</stride>
 <!-- Offset of tree-->

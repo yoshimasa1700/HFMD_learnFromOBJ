@@ -107,6 +107,8 @@ void detect(const CRForest &forest, CConfig conf){
         CDetectionResult detectR;
 
         dataSet.at(i).loadImage(conf);
+
+	std::cout << "haitta yo" << std::endl;
         detectR = forest.detection(dataSet.at(i));
 
         
