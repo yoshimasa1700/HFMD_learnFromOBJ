@@ -37,9 +37,9 @@ n<pheight>20</pheight>
 <!-- feature channel number-->
 <featurechannel>2</featurechannel>
 <!-- extract patch ratio-->
-<patchratio>2000</patchratio>
+<patchratio>1000</patchratio>
 <!-- Stride -->
-<stride>10</stride>
+<stride>5</stride>
 <!-- Offset of tree-->
 <offTree>0</offTree>
 <!-- test data path -->
@@ -47,7 +47,7 @@ n<pheight>20</pheight>
 <testdataname>testData.txt</testdataname>
 <classdatabasename>classDatabase</classdatabasename>
 <!--learning mode 1:depth 2:rgb 0:rgbd-->
-<learningmode>1</learningmode>
+<learningmode>0</learningmode>
 <testmode>1</testmode>
 <detectthreshold>3.0</detectthreshold>
 <traindatalistname>dataListInst2.0.txt</traindatalistname>
@@ -57,7 +57,7 @@ n<pheight>20</pheight>
 <negativedatafolderlist>negDataFolderList.txt</negativedatafolderlist>
 <negativedatalist>negDataList.txt</negativedatalist>
 <negativemode>1</negativemode>
-<posnegpatchratio>3.0</posnegpatchratio>
+<posnegpatchratio>5.0</posnegpatchratio>
 <activepatchratio>1.0</activepatchratio>
 <mindistance>350</mindistance>
 <maxdistance>1400</maxdistance>
@@ -70,5 +70,5 @@ n<pheight>20</pheight>
 <paramradius>3</paramradius>
 <modellistfolder>models</modellistfolder>
 <modellistname>models.txt</modellistname>
-<modellearningmode>1</modellearningmode>
+<modellearningmode>0</modellearningmode>
 </root>
