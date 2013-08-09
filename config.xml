@@ -3,7 +3,7 @@
   <!-- Path to trees -->
   <treepath>trees/treetable</treepath>
   <!-- Number of trees -->
-<ntree>20</ntree>
+<ntree>40</ntree>
 <!-- Patch width -->
 <pwidth>20</pwidth>
 <!-- Patch height -->
@@ -25,7 +25,7 @@ n<pheight>20</pheight>
 <!-- Scale factor for output image-->
 <sfactor>20</sfactor>
 <!-- Path to training images -->
-<trainimgpath>dataset</trainimgpath>
+<trainimgpath>../generateAppearance/dataset</trainimgpath>
 <!-- Train data file name -->
 <traindataname>trainData.txt</traindataname>
 <!-- Train image per tree-->
