@@ -1,7 +1,4 @@
-#pragma GCC diagnostic ignored "-fpermissive"
-
 #include <HFMD_core/CRForest.h>
-//#include "util.h"
 
 using namespace std;
 
@@ -9,12 +6,6 @@ int main(int argc, char* argv[]){
 
     //config file
     CConfig		conf;	 // setting
-
-    // init glut (for learn from obj file)
-    // glutInit(&argc, argv);
-    // glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);//GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    // glutInitWindowSize(640, 480);	/*  Window Size If We Start In Windowed Mode */
-    // glutCreateWindow("Wavefront Obj File Viewer");
 
     //read and check argument
     if(argc < 2) {
