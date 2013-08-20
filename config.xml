@@ -25,7 +25,7 @@ n<pheight>20</pheight>
 <!-- Scale factor for output image-->
 <sfactor>20</sfactor>
 <!-- Path to training images -->
-<trainimgpath>../generateAppearance/dataset</trainimgpath>
+<trainimgpath>./dataset</trainimgpath>
 <!-- Train data file name -->
 <traindataname>trainData.txt</traindataname>
 <!-- Train image per tree-->
@@ -37,7 +37,7 @@ n<pheight>20</pheight>
 <!-- feature channel number-->
 <featurechannel>2</featurechannel>
 <!-- extract patch ratio-->
-<patchratio>1000</patchratio>
+<patchratio>500</patchratio>
 <!-- Stride -->
 <stride>5</stride>
 <!-- Offset of tree-->
@@ -60,8 +60,8 @@ n<pheight>20</pheight>
 <posnegpatchratio>5.0</posnegpatchratio>
 <activepatchratio>1.0</activepatchratio>
 <!--<mindistance>350</mindistance>-->
-<mindistance>0</mindistance>
-<maxdistance>1350</maxdistance>
+<mindistance>350</mindistance>
+<maxdistance>1000</maxdistance>
 <numberOfTrials>100</numberOfTrials>
 <crossvalidationmode>1</crossvalidationmode>
 <clusterNumLimit>20</clusterNumLimit>

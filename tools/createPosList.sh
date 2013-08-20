@@ -68,10 +68,10 @@ num=`expr ${num} + 1`
 	    #cat ${iFolder}/dataList2.0.txt | sed -i "1 ${num}"  > ${iFolder}/dataList2.0.txt
 	    #sed -i "1s \\${num}" '${iFolder}/dataList2.0.txt'
 
-	    gsed -i"" "1s/^/${num}\n/" ${iFolder}/dataList2.0.txt
-	    gsed -i"" "1s/^/${num}\n/" ${iFolder}/dataListInst2.0.txt
-	    gsed -i"" "1s/^/${num}\n/" ${iFolder}/testDataList2.0.txt
-	    gsed -i"" "1s/^/${num}\n/" ${iFolder}/testDataListInst2.0.txt
+	    sed -i"" "1s/^/${num}\n/" ${iFolder}/dataList2.0.txt
+	    sed -i"" "1s/^/${num}\n/" ${iFolder}/dataListInst2.0.txt
+	    sed -i"" "1s/^/${num}\n/" ${iFolder}/testDataList2.0.txt
+	    sed -i"" "1s/^/${num}\n/" ${iFolder}/testDataListInst2.0.txt
 
 	done
     fi

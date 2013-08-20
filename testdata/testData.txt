@@ -1,8 +1,13 @@
-3
+6
 ./testData3
 ../dataset/ornament/ornament_3
 ../dataset/pack/pack_1
 ../dataset/pack/pack_2
+../dataset/bottle/bottle_1
+../dataset/bottle/bottle_2
+
+./testData1
+./testData2
 
 3
 ../dataset/ornament/ornament_1
@@ -10,8 +15,6 @@
 
 
 14
-../dataset/bottle/bottle_1
-../dataset/bottle/bottle_2
 ../dataset/pack/pack_1
 ../dataset/pack/pack_1
 ../dataset/koaramarch/koaramarch_1
