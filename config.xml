@@ -13,23 +13,23 @@
   <!-- extract patch ratio -->
   <patchratio>500</patchratio>
   <!-- Stride -->
-  <stride>5</stride>
+  <stride>1</stride>
   <!-- Train image per tree -->
-  <trainimagepertree>10</trainimagepertree>
+  <trainimagepertree>30</trainimagepertree>
   <!-- min sample number -->
   <minsample>5</minsample>
   <!-- max depth of tree -->
   <maxdepth>15</maxdepth>
   <!-- ratio of pos patch number and neg patch number -->
-  <posnegpatchratio>5.0</posnegpatchratio>
+  <posnegpatchratio>2.0</posnegpatchratio>
   <activepatchratio>1.0</activepatchratio>
   <numberOfTrials>100</numberOfTrials>
 
   <!--learning mode 1:depth 2:rgb 0:rgbd-->
   <learningmode>0</learningmode>
   <!-- haar-like : 0, HOG : 1, rotated haar-like : 2-->
-  <rgbFeature>2</rgbFeature>
-  <depthFeature>2</depthFeature>
+  <rgbfeature>2</rgbfeature>
+  <depthfeature>2</depthfeature>
 
   <trainposdata>
     <!-- Path to root of training data  -->
@@ -41,7 +41,7 @@
   </trainposdata>
 
   <trainnegdata>
-    <rootpathh>./negdata</rootpath>
+    <rootpath>./negdata</rootpath>
     <folderlist>negDataFolderList.txt</folderlist>
     <imagelist>negDataList.txt</imagelist>
   </trainnegdata>
@@ -53,7 +53,7 @@
   </testdata>
 
   <!-- Offset of tree-->
-  <offTree>0</offTree>
+  <offtree>0</offtree>
   <classdatabasename>classDatabase</classdatabasename>
 
   <!--<mindistance>350</mindistance>-->
