@@ -94,7 +94,6 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
 
 void detect(const CRForest &forest, CConfig conf){
     std::vector<CTestDataset> dataSet;
-
     std::fstream result("detectionResult.txt", std::ios::out);
 
     //set dataset
@@ -103,18 +102,18 @@ void detect(const CRForest &forest, CConfig conf){
 
     result << "groundTruth detectedClass Score Error" << std::endl;
 
-    for(int i = 0; i < dataSet.size(); ++i){
+    for(unsigned int i = 0; i < dataSet.size(); ++i){
         CDetectionResult detectR;
 
         dataSet.at(i).loadImage(conf);
 
-	std::cout << "haitta yo" << std::endl;
+	std::cout << "koko" << std::endl;
         detectR = forest.detection(dataSet.at(i));
 
-        
 
-        for(int j = 0; j < dataSet.at(i).param.size(); ++j)
-            for(int k = 0; k < detectR.detectedClass.size(); ++k)
+
+        for(unsigned int j = 0; j < dataSet.at(i).param.size(); ++j)
+            for(unsigned int k = 0; k < detectR.detectedClass.size(); ++k)
 	      result << dataSet.at(i).param.at(j).getClassName() << " " <<
 		detectR.detectedClass.at(k).name << " " <<
 		detectR.detectedClass.at(k).score << " " <<

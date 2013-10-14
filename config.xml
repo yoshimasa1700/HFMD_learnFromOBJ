@@ -11,11 +11,11 @@
   <pheight>20</pheight>
 
   <!-- extract patch ratio -->
-  <patchratio>500</patchratio>
+  <patchratio>1000</patchratio>
   <!-- Stride -->
-  <stride>10</stride>
+  <stride>5</stride>
   <!-- Train image per tree -->
-  <trainimagepertree>30</trainimagepertree>
+  <trainimagepertree>50</trainimagepertree>
   <!-- min sample number -->
   <minsample>5</minsample>
   <!-- max depth of tree -->
