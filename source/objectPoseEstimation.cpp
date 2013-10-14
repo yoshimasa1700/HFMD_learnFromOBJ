@@ -28,7 +28,7 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
 
     testimagefolder.resize(n_folders);
     for(int i = 0;i < n_folders; ++i)
-        in >> testimagefolder.at(i);
+        in >> testimagefolder[i];
     in.close();
 
     //read train file name and grand truth from file
@@ -40,7 +40,8 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
         testDataListPath
                 = conf.testPath + PATH_SEP + testimagefolder.at(i)
                 + PATH_SEP + conf.testdatalist;
-        std::string imageFilePath
+
+	std::string imageFilePath
                 = conf.testPath + PATH_SEP + testimagefolder.at(i) + PATH_SEP;
         //std::cout << trainDataListPath << std::endl;
         std::ifstream testDataList(testDataListPath.c_str());
@@ -75,6 +76,8 @@ void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
                         testDataList >> tempPoint.y;
                         //temp.centerPoint.push_back(tempPoint);
                         tempParam.setCenterPoint(tempPoint);
+			testDataList >> tempAngle[0];
+			testDataList >> tempAngle[1];
                         testDataList >> tempAngle[2];
                         //temp.angles.push_back(tempAngle);
                         tempParam.setAngle(tempAngle);
@@ -100,18 +103,20 @@ void detect(const CRForest &forest, CConfig conf){
     dataSet.clear();
     loadTestFileMultiObject(conf,dataSet);
 
+    std::cout << "test set detected"<< std::endl;
+
     result << "groundTruth detectedClass Score Error" << std::endl;
 
     for(unsigned int i = 0; i < dataSet.size(); ++i){
         CDetectionResult detectR;
 
-        dataSet.at(i).loadImage(conf);
+        dataSet[i].loadImage(conf);
 
-	std::cout << "koko" << std::endl;
         detectR = forest.detection(dataSet.at(i));
 
-
-
+	dataSet[i].releaseFeatures();
+	dataSet[i].releaseImage();
+	
         for(unsigned int j = 0; j < dataSet.at(i).param.size(); ++j)
             for(unsigned int k = 0; k < detectR.detectedClass.size(); ++k)
 	      result << dataSet.at(i).param.at(j).getClassName() << " " <<
@@ -144,29 +149,16 @@ int main(int argc, char* argv[]){
     } else
         conf.loadConfig(argv[1]);
 
-    if(argc < 3)
-        conf.off_tree = 0;
-    else
-        conf.off_tree = atoi(argv[2]);
-
     // create random forest class
     CRForest forest(conf);
 
     forest.loadForest();
+    
+    std::cout << "forest loaded" << std::endl;
 
-    //create tree directory
-//    string opath(conf.outpath);
-//    //std::cout << "kokomade kitayo" << std::endl;
-//    //std::cout << conf.outpath << std::endl;
-//    opath.erase(opath.find_last_of(PATH_SEP));
-//    string execstr = "mkdir ";
-//    execstr += opath;
-//    system( execstr.c_str() );
-
-    // learning
-    //forest.learning();
     detect(forest, conf);
 
+    std::cout << "return !" << std::endl;
     return 0;
 }
 

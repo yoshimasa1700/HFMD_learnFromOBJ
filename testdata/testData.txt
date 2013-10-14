@@ -1,10 +1,10 @@
-6
-./testData3
-../dataset/ornament/ornament_3
+4
 ../dataset/pack/pack_1
 ../dataset/pack/pack_2
 ../dataset/bottle/bottle_1
 ../dataset/bottle/bottle_2
+../dataset/ornament/ornament_3
+./testData3
 
 ./testData1
 ./testData2
