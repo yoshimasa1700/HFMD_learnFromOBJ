@@ -15,13 +15,13 @@
   <!-- Stride -->
   <stride>5</stride>
   <!-- Train image per tree -->
-  <trainimagepertree>50</trainimagepertree>
+  <trainimagepertree>30</trainimagepertree>
   <!-- min sample number -->
   <minsample>5</minsample>
   <!-- max depth of tree -->
   <maxdepth>15</maxdepth>
   <!-- ratio of pos patch number and neg patch number -->
-  <posnegpatchratio>2.0</posnegpatchratio>
+  <posnegpatchratio>10.0</posnegpatchratio>
   <activepatchratio>1.0</activepatchratio>
   <numberOfTrials>100</numberOfTrials>
 
@@ -37,7 +37,7 @@
     <!-- Training data folder list name -->
     <folderlist>trainData.txt</folderlist>
     <!-- Training data image list-->
-    <imagelist>dataListInst2.0.txt</imagelist>
+    <imagelist>dataList2.0.txt</imagelist>
   </trainposdata>
 
   <trainnegdata>

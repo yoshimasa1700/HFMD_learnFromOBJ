@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
     //create tree directory
     string tpath(conf.treepath);
     tpath.erase(tpath.find_last_of(PATH_SEP));
-    string execstr = "mkdir ";
+    string execstr = "mkdir -p ";
     execstr += tpath;
     system( execstr.c_str() );
 
