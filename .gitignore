@@ -9,3 +9,6 @@ objectposeestimation
 HFMD_eval.creator.user*
 #*
 dataset/
+trees*
+testdata/
+negdata
