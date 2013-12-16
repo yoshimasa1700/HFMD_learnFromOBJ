@@ -1,12 +1,12 @@
-38
-ball/ball1
-ball/ball2
-ball/ball3
-ball/ball4
+13
 bottle/bottle1
 bottle/bottle2
 bottle/bottle3
 bottle/bottle4
+ball/ball1
+ball/ball2
+ball/ball3
+ball/ball4
 can/can1
 can/can2
 can/can3

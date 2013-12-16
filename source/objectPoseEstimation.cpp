@@ -109,16 +109,26 @@ void detect(const CRForest &forest, CConfig conf){
 
   result << "groundTruth detectedClass Score Error" << std::endl;
 
+  cv::namedWindow("test");
+  cv::namedWindow("test2");
+
   for(unsigned int i = 0; i < dataSet.size(); ++i){
     CDetectionResult detectR;
 
     dataSet[i].loadImage(conf);
 	
 	
-    cv::namedWindow("test");
+
 
     cv::imshow("test", *dataSet[i].img[0]);
-    cv::waitKey(100);
+
+    cv::Mat showDepth;
+    
+    dataSet[i].img[1]->convertTo(showDepth, CV_8U, 255.0/1000);
+    cv::imshow("test2", showDepth);
+    
+
+    cv::waitKey(0);
     detectR = forest.detection(dataSet.at(i));
 
     dataSet[i].releaseFeatures();

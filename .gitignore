@@ -12,3 +12,4 @@ dataset/
 trees*
 testdata/
 negdata
+gmon.out

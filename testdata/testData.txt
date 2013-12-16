@@ -1,6 +1,8 @@
 4
-../dataset/pack/pack_1
-../dataset/pack/pack_2
+
+
+../image/bottle/pack_1
+../image/pack/pack_2
 ../dataset/bottle/bottle_1
 ../dataset/bottle/bottle_2
 ../dataset/ornament/ornament_3
