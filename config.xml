@@ -13,15 +13,15 @@
   <!-- extract patch ratio -->
   <patchratio>1000</patchratio>
   <!-- Stride -->
-  <stride>10</stride>
+  <stride>20</stride>
   <!-- Train image per tree -->
-  <trainimagepertree>59</trainimagepertree>
+  <trainimagepertree>30</trainimagepertree>
   <!-- min sample number -->
   <minsample>5</minsample>
   <!-- max depth of tree -->
   <maxdepth>10</maxdepth>
   <!-- ratio of pos patch number and neg patch number -->
-  <posnegpatchratio>18.0</posnegpatchratio>
+  <posnegpatchratio>10.0</posnegpatchratio>
   <activepatchratio>1.0</activepatchratio>
   <numberOfTrials>100</numberOfTrials>
 
@@ -37,7 +37,7 @@
     <!-- Training data folder list name -->
     <folderlist>trainDataList2.0.txt</folderlist>
     <!-- Training data image list-->
-    <imagelist>dataList2.0.txt</imagelist>
+    <imagelist>dataListInst2.0.txt</imagelist>
   </trainposdata>
 
   <trainnegdata>
@@ -47,7 +47,8 @@
   </trainnegdata>
 
   <testdata>
-    <rootpath>./image</rootpath>
+    <rootpath>../2013-02-02_smallset_crop</rootpath>
+    <!-- <rootpath>./image</rootpath> -->
     <folderlist>testDataList2.0.txt</folderlist>
     <imagelist>testDataListInst2.0.txt</imagelist>
   </testdata>
