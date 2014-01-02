@@ -1,13 +1,9 @@
-2
-bottle/bottle1
-koara/koara1
+1
+mouse
 
-bottle/bottle2
-bottle/bottle3
-bottle/bottle4
-
-koara/koara2
-ball/ball_1
+12
+ball/bal
+l_1
 ball/ball_2
 ball/ball_3
 lint_roller/lint_roller_1
@@ -19,6 +15,7 @@ spray/spray_3
 watering_pot/watering_pot_1
 watering_pot/watering_pot_2
 watering_pot/watering_pot_3
+
 ball/ball4
 
 bottle/bottle1
@@ -28,7 +25,8 @@ bottle/bottle4
 can/can1
 can/can2
 can/can3
-
+koara/koara1
+koara/koara2
 
 ornament/ornament1
 ornament/ornament2
@@ -47,4 +45,3 @@ trashbox/trashbox2
 trashbox/trashbox3
 tsuchiya/tsuchiya1
 tsuchiya/tsuchiya2
-

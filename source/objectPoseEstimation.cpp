@@ -111,25 +111,23 @@ void detect(const CRForest &forest, CConfig conf){
 
   cv::namedWindow("test");
   cv::namedWindow("test2");
+  cv::namedWindow("vote");
 
   for(unsigned int i = 0; i < dataSet.size(); ++i){
     CDetectionResult detectR;
 
     dataSet[i].loadImage(conf);
-	
-	
-
+    detectR = forest.detection(dataSet.at(i));
 
     cv::imshow("test", *dataSet[i].img[0]);
 
     cv::Mat showDepth;
     
     dataSet[i].img[1]->convertTo(showDepth, CV_8U, 255.0/1000);
-        cv::imshow("test2", showDepth);
+    cv::imshow("test2", showDepth);
     
 
-        cv::waitKey(1);
-    detectR = forest.detection(dataSet.at(i));
+    cv::waitKey(0);
 
     dataSet[i].releaseFeatures();
     dataSet[i].releaseImage();
@@ -137,15 +135,15 @@ void detect(const CRForest &forest, CConfig conf){
     for(unsigned int j = 0; j < dataSet.at(i).param.size(); ++j)
       for(unsigned int k = 0; k < detectR.detectedClass.size(); ++k)
 	result << dataSet.at(i).param.at(j).getClassName() << " " <<
-	  detectR.detectedClass.at(k).name << " " <<
-	  detectR.detectedClass.at(k).score << " " <<
-	  detectR.detectedClass.at(k).error << " " <<
-	  dataSet.at(i).param.at(j).getAngle()[0] << " " <<
-	  dataSet.at(i).param.at(j).getAngle()[1] << " " <<
-	  dataSet.at(i).param.at(j).getAngle()[2] << " " <<
-	  detectR.detectedClass.at(k).angle[0] << " " <<
-	  detectR.detectedClass.at(k).angle[1] << " " <<
-	  detectR.detectedClass.at(k).angle[2] << std::endl;
+            detectR.detectedClass.at(k).name << " " <<
+            detectR.detectedClass.at(k).score << " " <<
+            detectR.detectedClass.at(k).error << " " <<
+            dataSet.at(i).param.at(j).getAngle()[0] << " " <<
+            dataSet.at(i).param.at(j).getAngle()[1] << " " <<
+            dataSet.at(i).param.at(j).getAngle()[2] << " " <<
+            detectR.detectedClass.at(k).angle[0] << " " <<
+            detectR.detectedClass.at(k).angle[1] << " " <<
+            detectR.detectedClass.at(k).angle[2] << std::endl;
   }
 
   result.close();

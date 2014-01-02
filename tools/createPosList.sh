@@ -47,10 +47,12 @@ do
 			    centx=`expr $width / 2`
 			    centy=`expr $height / 2`
 
-			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png ${bName%_*}_maskcrop.png ${cFolder##*/} 0 0 $angle >> ${iFolder}/dataList2.0.txt
-			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png ${bName%_*}_maskcrop.png ${iFolder##*/} 0 0 $angle >> ${iFolder}/dataListInst2.0.txt
-			    echo "${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${cFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL" >> ${iFolder}/testDataList2.0.txt
-			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${iFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL >> ${iFolder}/testDataListInst2.0.txt			
+			    # echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png ${bName%_*}_maskcrop.png ${cFolder##*/} 0 0 $angle >> ${iFolder}/dataList2.0.txt
+			    # echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png ${bName%_*}_maskcrop.png ${iFolder##*/} 0 0 $angle >> ${iFolder}/dataListInst2.0.txt
+			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${cFolder##*/} 0 0 $angle >> ${iFolder}/dataList2.0.txt
+			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${iFolder##*/} 0 0 $angle >> ${iFolder}/dataListInst2.0.txt
+			    echo "${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${cFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL" >> ${iFolder}/testDataList2.0.txt
+			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${iFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL >> ${iFolder}/testDataListInst2.0.txt			
 	#echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${cFolder##*/} ${centx} ${centy} ${angle} EOL
 			    #echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${iFolder##*/} ${centx} ${centy} ${angle} EOL 		
 		

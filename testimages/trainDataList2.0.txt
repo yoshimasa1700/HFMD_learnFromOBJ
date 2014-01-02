@@ -1,4 +1,5 @@
-2
+1
+mouse
 bottle/bottle1
 koara/koara1
 
