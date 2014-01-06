@@ -1,5 +1,5 @@
 60
-bottle_10_crop.png bottle_10_depthcrop.png nodata bottle1 113 182 0 0 60 EOL
+bottle_10_crop.png bottle_10_depthcrop.png nodata bottle_1 113 182 0 0 60 EOL
 bottle_11_crop.png bottle_11_depthcrop.png nodata bottle1 113 182 0 0 66 EOL
 bottle_12_crop.png bottle_12_depthcrop.png nodata bottle1 113 182 0 0 72 EOL
 bottle_13_crop.png bottle_13_depthcrop.png nodata bottle1 113 182 0 0 78 EOL

@@ -1,4 +1,4 @@
-9
+19
 ./background
 ../olddataset/can/can_1
 ../olddataset/can/can_2
@@ -8,7 +8,6 @@
 ../olddataset/painomi/painomi_2
 ../olddataset/pakuncho/pakuncho_1
 ../olddataset/pakuncho/pakuncho_2
-
 ../olddataset/pack/pack_1
 ../olddataset/pack/pack_2
 ../olddataset/ornament/ornament_1

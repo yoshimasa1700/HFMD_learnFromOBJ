@@ -121,10 +121,10 @@ void detect(const CRForest &forest, CConfig conf){
 
     cv::imshow("test", *dataSet[i].img[0]);
 
-    cv::Mat showDepth;
+    //    cv::Mat showDepth;
     
-    dataSet[i].img[1]->convertTo(showDepth, CV_8U, 255.0/1000);
-    cv::imshow("test2", showDepth);
+    //    dataSet[i].img[1]->convertTo(showDepth, CV_8U, 255.0/1000);
+    //    cv::imshow("test2", showDepth);
     
 
     cv::waitKey(0);
