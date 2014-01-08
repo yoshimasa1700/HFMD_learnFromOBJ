@@ -26,7 +26,7 @@ do
 	    touch ${iFolder}/dataListInst2.0.txt
 	    touch ${iFolder}/testDataList2.0.txt
 	    touch ${iFolder}/testDataListInst2.0.txt
-
+	    touch ${iFolder}/negDataList.txt
 
 	    num=0
 	    for f in ${fileList}
@@ -52,7 +52,8 @@ do
 			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${cFolder##*/} 0 0 $angle >> ${iFolder}/dataList2.0.txt
 			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${iFolder##*/} 0 0 $angle >> ${iFolder}/dataListInst2.0.txt
 			    echo "${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${cFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL" >> ${iFolder}/testDataList2.0.txt
-			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${iFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL >> ${iFolder}/testDataListInst2.0.txt			
+			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png NULL ${iFolder##*/} ${centx} ${centy} 0 0 ${angle} EOL >> ${iFolder}/testDataListInst2.0.txt
+			    echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png >> ${iFolder}/negDataList.txt
 	#echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${cFolder##*/} ${centx} ${centy} ${angle} EOL
 			    #echo ${bName%_*}_crop.png ${bName%_*}_depthcrop.png nodata ${iFolder##*/} ${centx} ${centy} ${angle} EOL 		
 		
@@ -74,6 +75,7 @@ num=`expr ${num} + 1`
 	    sed -i"" "1s/^/${num}\n/" ${iFolder}/dataListInst2.0.txt
 	    sed -i"" "1s/^/${num}\n/" ${iFolder}/testDataList2.0.txt
 	    sed -i"" "1s/^/${num}\n/" ${iFolder}/testDataListInst2.0.txt
+	    sed -i"" "1s/^/${num}\n/" ${iFolder}/negDataList.txt
 
 	done
     fi

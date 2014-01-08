@@ -1,10 +1,10 @@
 26
-rgb_0.png depth_0.png
-rgb_1.png depth_1.png
-rgb_2.png depth_2.png
-rgb_3.png depth_3.png
-rgb_4.png depth_4.png
-rgb_5.png depth_5.png
+color_0.png depth_0.png
+color_1.png depth_1.png
+color_2.png depth_2.png
+color_3.png depth_3.png
+color_4.png depth_4.png
+color_5.png depth_5.png
 rgb_6.png depth_6.png
 rgb_7.png depth_7.png
 rgb_8.png depth_8.png

@@ -1,4 +1,4 @@
-4
+10
 bottle/bottle1
 bottle/bottle2
 bottle/bottle3

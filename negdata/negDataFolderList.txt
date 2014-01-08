@@ -1,5 +1,7 @@
-19
-./background
+22
+../image/lint_roller/lint_roller_1
+../image/lint_roller/lint_roller_2
+../image/lint_roller/lint_roller_3
 ../olddataset/can/can_1
 ../olddataset/can/can_2
 ../olddataset/can/can_3
@@ -18,6 +20,6 @@
 ../olddataset/koaramarch/koaramarch_1
 ../olddataset/koaramarch/koaramarch_2
 ../olddataset/koaramarch/koaramarch_3
-
+./background
 ../olddataset/bottle/bottle_2
 

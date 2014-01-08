@@ -1,6 +1,6 @@
 5
-testbottle_1_crop.png testbottle_1_depthcrop.png testbottle_1_maskcrop.png testbottle 0 0 6
-testbottle_2_crop.png testbottle_2_depthcrop.png testbottle_2_maskcrop.png testbottle 0 0 12
-testbottle_3_crop.png testbottle_3_depthcrop.png testbottle_3_maskcrop.png testbottle 0 0 18
-testbottle_4_crop.png testbottle_4_depthcrop.png testbottle_4_maskcrop.png testbottle 0 0 24
-testbottle_5_crop.png testbottle_5_depthcrop.png testbottle_5_maskcrop.png testbottle 0 0 30
+testbottle_1_crop.png testbottle_1_depthcrop.png NULL testbottle 0 0 6
+testbottle_2_crop.png testbottle_2_depthcrop.png NULL testbottle 0 0 12
+testbottle_3_crop.png testbottle_3_depthcrop.png NULL testbottle 0 0 18
+testbottle_4_crop.png testbottle_4_depthcrop.png NULL testbottle 0 0 24
+testbottle_5_crop.png testbottle_5_depthcrop.png NULL testbottle 0 0 30
