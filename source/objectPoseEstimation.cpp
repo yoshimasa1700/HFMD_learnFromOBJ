@@ -127,7 +127,7 @@ void detect(const CRForest &forest, CConfig conf){
     //    cv::imshow("test2", showDepth);
     
 
-    cv::waitKey(1);
+    cv::waitKey(0);
 
     dataSet[i].releaseFeatures();
     dataSet[i].releaseImage();

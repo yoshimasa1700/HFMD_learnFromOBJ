@@ -3,25 +3,25 @@
   <!-- Path to trees -->
   <treepath>./trees/treetable</treepath>
   <!-- Number of trees -->
-  <ntree>40</ntree>
+  <ntree>100</ntree>
 
   <!-- Patch width -->
-  <pwidth>10</pwidth>
+  <pwidth>50</pwidth>
   <!-- Patch height -->
-  <pheight>10</pheight>
+  <pheight>50</pheight>
 
   <!-- extract patch ratio -->
-  <patchratio>1000</patchratio>
+  <patchratio>500</patchratio>
   <!-- Stride -->
-  <stride>50</stride>
+  <stride>5</stride>
   <!-- Train image per tree -->
   <trainimagepertree>60</trainimagepertree>
   <!-- min sample number -->
   <minsample>5</minsample>
   <!-- max depth of tree -->
-  <maxdepth>10</maxdepth>
+  <maxdepth>15</maxdepth>
   <!-- ratio of pos patch number and neg patch number -->
-  <posnegpatchratio>10.0</posnegpatchratio>
+  <posnegpatchratio>20.0</posnegpatchratio>
   <activepatchratio>1.0</activepatchratio>
   <numberOfTrials>100</numberOfTrials>
 
@@ -57,8 +57,8 @@
   <classdatabasename>classDatabase</classdatabasename>
 
   <!--<mindistance>350</mindistance>-->
-  <mindistance>350</mindistance>
-  <maxdistance>1000</maxdistance>
+  <mindistance>0</mindistance>
+  <maxdistance>1024</maxdistance>
 
   <modellistfolder>models</modellistfolder>
   <modellistname>models.txt</modellistname>
