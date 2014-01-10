@@ -7,6 +7,11 @@
 
 using namespace std;
 
+int face[] = {cv::FONT_HERSHEY_SIMPLEX, cv::FONT_HERSHEY_PLAIN, cv::FONT_HERSHEY_DUPLEX, cv::FONT_HERSHEY_COMPLEX, 
+	      cv::FONT_HERSHEY_TRIPLEX, cv::FONT_HERSHEY_COMPLEX_SMALL, cv::FONT_HERSHEY_SCRIPT_SIMPLEX, 
+	      cv::FONT_HERSHEY_SCRIPT_COMPLEX, cv::FONT_ITALIC};
+
+
 void loadTestFileMultiObject(CConfig conf, std::vector<CTestDataset> &testSet){
   std::string testfilepath = conf.testPath + PATH_SEP +  conf.testData;
   int n_folders;
@@ -121,13 +126,14 @@ void detect(const CRForest &forest, CConfig conf){
 
     cv::imshow("test", *dataSet[i].img[0]);
 
+    cv::Mat showImg = dataSet[i].img[0]->clone();
     //    cv::Mat showDepth;
     
     //dataSet[i].img[1]->convertTo(showDepth, CV_8U, 255.0/1000);
     //    cv::imshow("test2", showDepth);
     
 
-    cv::waitKey(0);
+    //    cv::waitKey(0);
 
     dataSet[i].releaseFeatures();
     dataSet[i].releaseImage();
@@ -144,6 +150,31 @@ void detect(const CRForest &forest, CConfig conf){
             detectR.detectedClass.at(k).angle[0] << " " <<
             detectR.detectedClass.at(k).angle[1] << " " <<
             detectR.detectedClass.at(k).angle[2] << std::endl;
+
+    for(uint l = 0; l < detectR.detectedClass.size();++l){
+      if(detectR.detectedClass[l].score > 0.0){
+        cv::Scalar color((l+1)*130%255, (l+2)*130%255,l*130%255);
+    
+        cv::circle(showImg, detectR.detectedClass[l].centerPoint, 5, color,2);
+        cv::putText(showImg, 
+                    detectR.detectedClass[l].name, 
+                    detectR.detectedClass[l].centerPoint + cv::Point(0,30), 
+                    face[4]|face[8], 
+                    0.8, 
+                    color, 2, CV_AA);
+
+        std::stringstream ss;
+        ss << detectR.detectedClass[l].score;
+        cv::putText(showImg, 
+                    ss.str(),
+                    detectR.detectedClass[l].centerPoint + cv::Point(0,60), 
+                    face[4]|face[8], 
+                    0.8, 
+                    color, 2, CV_AA);
+      }
+    }
+    cv::imshow("test", showImg);
+    cv::waitKey(0);
   }
 
   result.close();

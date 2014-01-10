@@ -1,4 +1,4 @@
-22
+20
 ../image/lint_roller/lint_roller_1
 ../image/lint_roller/lint_roller_2
 ../image/lint_roller/lint_roller_3
@@ -12,9 +12,6 @@
 ../olddataset/pakuncho/pakuncho_2
 ../olddataset/pack/pack_1
 ../olddataset/pack/pack_2
-../olddataset/ornament/ornament_1
-../olddataset/ornament/ornament_2
-../olddataset/ornament/ornament_3
 ../olddataset/pack/pack_1
 ../olddataset/pack/pack_2
 ../olddataset/koaramarch/koaramarch_1
@@ -22,4 +19,7 @@
 ../olddataset/koaramarch/koaramarch_3
 ./background
 ../olddataset/bottle/bottle_2
-
+../olddataset/bottle/bottle_1
+../olddataset/ornament/ornament_1
+../olddataset/ornament/ornament_2
+../olddataset/ornament/ornament_3

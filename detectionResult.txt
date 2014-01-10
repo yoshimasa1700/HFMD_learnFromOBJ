@@ -1,19 +1,6 @@
 groundTruth detectedClass Score Error
-blueJacket blueJacket 0.841734 329.219 0 0 0 0 0 0
-blueJacket orangeJacket 0.797675 323.557 0 0 0 0 0 0
-blueJacket noneJacket 0.347458 323.186 0 0 0 0 0 0
-blueJacket blueJacket 0.839978 228.09 0 0 0 0 0 0
-blueJacket orangeJacket 0.790851 236.144 0 0 0 0 0 0
-blueJacket noneJacket 0.348123 621.393 0 0 0 0 0 0
-blueJacket blueJacket 0.841481 331.436 0 0 0 0 0 0
-blueJacket orangeJacket 0.79744 328.938 0 0 0 0 0 0
-blueJacket noneJacket 0.347059 323.186 0 0 0 0 0 0
-blueJacket blueJacket 0.800439 415.271 0 0 0 0 0 0
-blueJacket orangeJacket 0.767819 418.298 0 0 0 0 0 0
-blueJacket noneJacket 0.335222 423.236 0 0 0 0 0 0
-blueJacket blueJacket 0.852324 395.218 0 0 0 0 0 0
-blueJacket orangeJacket 0.819721 389.221 0 0 0 0 0 0
-blueJacket noneJacket 0.354908 364.198 0 0 0 0 0 0
-orangeJacket blueJacket 0.740343 634.303 0 0 0 0 0 0
-orangeJacket orangeJacket 0.678661 638.122 0 0 0 0 0 0
-orangeJacket noneJacket 0.238677 592.16 0 0 0 0 0 0
+bottle1 bottle1 1.04184 22.2036 0 0 60 180 0 0
+bottle1 bottle1 1.07236 21.6333 0 0 66 180 0 0
+bottle1 bottle1 1.06373 20.8087 0 0 72 180 0 0
+bottle1 bottle1 1.07956 21.6333 0 0 78 180 0 0
+bottle1 bottle1 1.07384 21.095 0 0 84 180 0 0
