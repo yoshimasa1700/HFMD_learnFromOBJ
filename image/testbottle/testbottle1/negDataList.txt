@@ -1,6 +1,0 @@
-5
-testbottle_1_crop.png testbottle_1_depthcrop.png
-testbottle_2_crop.png testbottle_2_depthcrop.png
-testbottle_3_crop.png testbottle_3_depthcrop.png
-testbottle_4_crop.png testbottle_4_depthcrop.png
-testbottle_5_crop.png testbottle_5_depthcrop.png

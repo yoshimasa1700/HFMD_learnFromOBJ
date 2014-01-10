@@ -1,4 +1,0 @@
-groundTruth detectedClass Score Error
-koara1 koara1 1.12264 45.3431 0 0 60 180 0 0
-koara1 koara1 1.26254 46.4004 0 0 66 180 0 0
-koara1 koara1 1.1952 53.3385 0 0 72 180 0 0

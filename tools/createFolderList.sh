@@ -4,10 +4,10 @@ basename=$1
 echo "${basename}"
 classFolderList=(`echo ${basename}/*`)
 
-rm ${basename}/trainDataList2.0.txt
-rm ${basename}/testDataList2.0.txt
-touch ${basename}/trainDataList2.0.txt
-touch ${basename}/testDataList2.0.txt
+rm ${basename}/trainFolderList.txt
+rm ${basename}/testFolderList.txt
+touch ${basename}/trainFolderList.txt
+touch ${basename}/testFolderList.txt
 
 num=0
 
@@ -24,8 +24,8 @@ do
 	    echo $iFolder
 	    
 	    short=${iFolder#*/}
-	    echo ${short#*/} >> ${basename}/trainDataList2.0.txt
-	    echo ${short#*/} >> ${basename}/testDataList2.0.txt
+	    echo ${short#*/} >> ${basename}/trainFolderList.txt
+	    echo ${short#*/} >> ${basename}/testFolderList.txt
 	    #cat ${iFolder}/dataList2.0.txt | sed -i "1 ${num}"  > ${iFolder}/dataList2.0.txt
 	    #sed -i "1s \\${num}" '${iFolder}/dataList2.0.txt'
 	    num=`expr $num + 1`
@@ -35,8 +35,8 @@ do
         
 done
 
-sed -i "1s/^/${num}\n/" ${basename}/trainDataList2.0.txt
-    sed -i "1s/^/${num}\n/" ${basename}/testDataList2.0.txt
+sed -i "1s/^/${num}\n/" ${basename}/trainFolderList.txt
+    sed -i "1s/^/${num}\n/" ${basename}/testFolderList.txt
 
 # if [ $# -ge 1 ]; then
 #     echo "60" > dataList.txt

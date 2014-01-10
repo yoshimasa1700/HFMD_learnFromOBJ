@@ -19,8 +19,8 @@ SET (CMAKE_CXX_FLAGS "-pg")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive -pg")
 
 # ビルドのタイプはリリース
-SET(CMAKE_BUILD_TYPE Release)
-#SET(CMAKE_BUILD_TYPE Debug)
+#SET(CMAKE_BUILD_TYPE Release)
+SET(CMAKE_BUILD_TYPE Debug)
 # 環境変数の登録
 
 
@@ -52,11 +52,11 @@ include_directories(${OPENGL_INCLUDE_DIRS})
 # ライブラリの場所
 LINK_DIRECTORIES("/usr/local/lib")
 
-#SET(RANDOM_FOREST source/CRForest.cpp source/util.cpp source/CRTree.cpp source/HoG.cpp source/CDataset.cpp source/CConfig.cpp source/globjloader.cpp)
+#SET(RANDOM_FOREST src/CRForest.cpp src/util.cpp src/CRTree.cpp source/HoG.cpp source/CDataset.cpp source/CConfig.cpp source/globjloader.cpp)
 
 # 実行ファイルを生成
-ADD_EXECUTABLE(objectPoseEstimation source/objectPoseEstimation.cpp)# ${RANDOM_FOREST})
-ADD_EXECUTABLE(learning source/learning.cpp)# ${RANDOM_FOREST})
+ADD_EXECUTABLE(objectPoseEstimation src/objectPoseEstimation.cpp)# ${RANDOM_FOREST})
+ADD_EXECUTABLE(learning src/learning.cpp)# ${RANDOM_FOREST})
 
 # ライブラリとリンクする
 TARGET_LINK_LIBRARIES(objectPoseEstimation HFMD_core ${OpenCV_LIBRARIES} ${Boost_LIBRARIES} ${OPENGL_LIBRARIES} )
