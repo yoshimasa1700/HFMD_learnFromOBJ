@@ -1,6 +1,4 @@
 groundTruth detectedClass Score Error
-bottle1 bottle1 1.04184 22.2036 0 0 60 180 0 0
-bottle1 bottle1 1.07236 21.6333 0 0 66 180 0 0
-bottle1 bottle1 1.06373 20.8087 0 0 72 180 0 0
-bottle1 bottle1 1.07956 21.6333 0 0 78 180 0 0
-bottle1 bottle1 1.07384 21.095 0 0 84 180 0 0
+koara1 koara1 1.12264 45.3431 0 0 60 180 0 0
+koara1 koara1 1.26254 46.4004 0 0 66 180 0 0
+koara1 koara1 1.1952 53.3385 0 0 72 180 0 0

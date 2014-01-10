@@ -1,6 +1,8 @@
-1
-bottle/bottle1
+2
+koara/koara1
 ornament/ornament1
+bottle/bottle1
+
 
 bottle/bottle2
 bottle/bottle3
@@ -24,7 +26,7 @@ ball/ball4
 can/can1
 can/can2
 can/can3
-koara/koara1
+
 koara/koara2
 
 

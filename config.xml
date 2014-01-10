@@ -6,9 +6,9 @@
   <ntree>40</ntree>
 
   <!-- Patch width -->
-  <pwidth>30</pwidth>
+  <pwidth>50</pwidth>
   <!-- Patch height -->
-  <pheight>30</pheight>
+  <pheight>50</pheight>
 
   <!-- extract patch ratio -->
   <patchratio>500</patchratio>
@@ -60,6 +60,9 @@
   <!--<mindistance>350</mindistance>-->
   <mindistance>0</mindistance>
   <maxdistance>1024</maxdistance>
+
+  <poseestimatecircle>5</poseestimatecircle>
+  <showvote>0</showvote>
 
   <modellistfolder>models</modellistfolder>
   <modellistname>models.txt</modellistname>
